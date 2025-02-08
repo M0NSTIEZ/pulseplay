@@ -1,5 +1,6 @@
 package com.example.pulseplay
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,5 +17,16 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        // Simulate a login process (replace with your actual login logic)
+        val isLoginSuccessful = true // Assume login is successful
+        if (isLoginSuccessful) {
+            navigateToHomePage()
+        }
+    }
+
+    private fun navigateToHomePage() {
+        val intent = Intent(this, HomePage::class.java)
+        startActivity(intent)
+        finish() // Optional: Close MainActivity to prevent going back
     }
 }
