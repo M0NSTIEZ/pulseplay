@@ -9,32 +9,33 @@
     tools:context=".MainActivity">
 
     <!-- Top Image (Skipping Rope Illustration) -->
+
+    <!-- White Container with Rounded Corners -->
     <ImageView
         android:id="@+id/exercise_image"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="300dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/exercise"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:src="@drawable/exercise1"
+        app:layout_constraintTop_toTopOf="0dp"
+        tools:layout_editor_absoluteX="-50dp" />
 
-    <!-- White Container with Rounded Corners -->
     <androidx.cardview.widget.CardView
         android:id="@+id/main_card"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="-40dp"
         android:background="@drawable/avt1"
+        android:layout_marginTop="-20dp"
         app:cardElevation="8dp"
         app:layout_constraintTop_toBottomOf="@id/exercise_image"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="400dp"
 
             android:orientation="vertical"
-
-            android:padding="16dp">
+            android:padding="15dp">
 
             <!-- Meal Planner & Sleep Tracker -->
             <LinearLayout
@@ -46,31 +47,32 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/rounded_button_green"
                     android:gravity="center_vertical"
-                    android:padding="10dp"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/calendar"
-                        app:tint="#000000"/>
+                        app:tint="#000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Meal Planner"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
                         android:layout_marginStart="10dp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:text="Meal Planner"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/more"
-                        app:tint="@color/black"/>
+                        app:tint="@color/black" />
                 </LinearLayout>
 
                 <!-- Sleep Tracker -->
@@ -79,28 +81,29 @@
                     android:layout_height="50dp"
                     android:background="@drawable/rounded_button_purple"
                     android:gravity="center_vertical"
-                    android:padding="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/swap"
-                        app:tint="#000000"/>
+                        app:tint="#000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sleep Tracker"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
                         android:layout_marginStart="10dp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:text="Sleep Tracker"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/more"
-                        app:tint="@color/black"/>
+                        app:tint="@color/black" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -108,11 +111,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
                 android:text="Set Goal"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="8dp"/>
+                android:textStyle="bold" />
 
             <!-- Exercise List -->
             <ScrollView
@@ -130,170 +133,169 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:padding="10dp">
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@drawable/exer1"
                             android:scaleType="centerCrop"
-                           />
+                            android:src="@drawable/exer1" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginStart="10dp">
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Warm Up"
                                 android:textSize="14sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="05:00"
-                                android:textSize="12sp"
-                                android:textColor="@android:color/darker_gray"/>
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/circle_more"/>
+                            android:src="@drawable/circle_more" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:padding="10dp">
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@drawable/exer1"
                             android:scaleType="centerCrop"
-                            />
+                            android:src="@drawable/exer1" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginStart="10dp">
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Warm Up"
                                 android:textSize="14sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="05:00"
-                                android:textSize="12sp"
-                                android:textColor="@android:color/darker_gray"/>
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/circle_more"/>
+                            android:src="@drawable/circle_more" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:padding="10dp">
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@drawable/exer1"
                             android:scaleType="centerCrop"
-                            />
+                            android:src="@drawable/exer1" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginStart="10dp">
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Warm Up"
                                 android:textSize="14sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="05:00"
-                                android:textSize="12sp"
-                                android:textColor="@android:color/darker_gray"/>
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/circle_more"/>
+                            android:src="@drawable/circle_more" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:padding="10dp">
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@drawable/exer1"
                             android:scaleType="centerCrop"
-                            />
+                            android:src="@drawable/exer1" />
 
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginStart="10dp">
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Warm Up"
                                 android:textSize="14sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="05:00"
-                                android:textSize="12sp"
-                                android:textColor="@android:color/darker_gray"/>
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/circle_more"/>
+                            android:src="@drawable/circle_more" />
                     </LinearLayout>
 
 
