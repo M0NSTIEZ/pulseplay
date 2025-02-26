@@ -1,4 +1,4 @@
-package com.example.pulseplay.Fragments
+package com.example.pulseplay.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -3,10 +3,10 @@ package com.example.pulseplay
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.pulseplay.Fragments.ActivityFragment
-import com.example.pulseplay.Fragments.CameraFragment
-import com.example.pulseplay.Fragments.HomeFragment
-import com.example.pulseplay.Fragments.ProfileFragment
+import com.example.pulseplay.fragments.ActivityFragment
+import com.example.pulseplay.fragments.CameraFragment
+import com.example.pulseplay.fragments.HomeFragment
+import com.example.pulseplay.fragments.ProfileFragment
 import com.example.pulseplay.databinding.ActivityHomePageBinding
 
 class HomePage : AppCompatActivity() {
