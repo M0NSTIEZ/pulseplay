@@ -87,7 +87,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/bluetooth_backround"
+        android:background="@drawable/bluetooth_background"
         android:padding="20dp">
 
         <!-- Bluetooth Text -->

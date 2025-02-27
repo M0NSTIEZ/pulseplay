@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MealPlanner"
-    android:background="@color/white">
+    tools:context=".activity.SleepTracker">
 
     <!-- Back Button -->
     <ImageButton
-        android:id="@+id/mp_back"
+        android:id="@+id/st_back"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/backbutton"
@@ -23,7 +21,7 @@
 
     <!-- More Options Button -->
     <ImageView
-        android:id="@+id/more_options"
+        android:id="@+id/sleepmore_options"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/detail"
@@ -37,7 +35,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meal Planner"
+        android:text="Sleep Tracker"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -62,10 +60,10 @@
 
         <!-- Set Daily Calorie Burn Text -->
         <TextView
-            android:id="@+id/calorie_text"
+            android:id="@+id/sleep_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Set Daily Calorie Burn"
+            android:text="Daily Sleep Schedule"
             android:textSize="15sp"
             android:textColor="@android:color/black"
             android:layout_weight="1"
@@ -73,7 +71,7 @@
 
         <!-- Check Button -->
         <Button
-            android:id="@+id/check_button"
+            android:id="@+id/sleepcheck_button"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:text="Check"
@@ -84,5 +82,4 @@
             android:shape="rectangle"
             />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
