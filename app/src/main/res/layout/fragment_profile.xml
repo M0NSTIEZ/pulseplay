@@ -509,13 +509,5 @@
     </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation View fixed at the bottom -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_marginTop="0dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
