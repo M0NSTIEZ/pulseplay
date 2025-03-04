@@ -8,7 +8,7 @@ import com.example.pulseplay.fragments.CameraFragment
 import com.example.pulseplay.fragments.HomeFragment
 import com.example.pulseplay.fragments.ProfileFragment
 import com.example.pulseplay.databinding.ActivityHomePageBinding
-
+//dashboard
 class HomePage : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomePageBinding

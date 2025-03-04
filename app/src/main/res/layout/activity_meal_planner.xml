@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MealPlanner"
@@ -80,9 +78,54 @@
             android:textSize="14sp"
             android:textColor="@android:color/white"
             android:backgroundTint="#6B50F6"
-            android:layout_gravity="center_vertical"
-            android:shape="rectangle"
-            />
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/today_meals_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bluetooth_background"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calorie_container"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/today_meals_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Today Meals"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <Button
+            android:id="@+id/add_meal_button"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:text="Add Meal"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#00E676"/>
+    </LinearLayout>
+
+    <!-- RecyclerView to List Meals -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mealRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/today_meals_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
