@@ -15,6 +15,12 @@
         android:theme="@style/Theme.PulsePlay"
         tools:targetApi="31">
         <activity
+            android:name=".activity.MealPlanner"
+            android:exported="false" />
+        <activity
+            android:name=".activity.meal_planner"
+            android:exported="false" />
+        <activity
             android:name=".WelcomeScreen5"
             android:exported="false" />
         <activity
@@ -31,9 +37,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.SleepTracker"
-            android:exported="false" />
-        <activity
-            android:name=".activity.MealPlanner"
             android:exported="false" />
         <activity
             android:name=".EditProfile"

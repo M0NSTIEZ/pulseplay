@@ -1,9 +1,11 @@
 package com.example.pulseplay.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +20,7 @@ class MealPlanner : AppCompatActivity() {
     private lateinit var mealAdapter: MealAdapter
     private val mealList = mutableListOf<Meal>()
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meal_planner)
@@ -27,6 +30,12 @@ class MealPlanner : AppCompatActivity() {
 
         mealRecyclerView.layoutManager = LinearLayoutManager(this)
         mealRecyclerView.adapter = mealAdapter
+
+        // ✅ Find back button outside of add_meal_button click
+        val backButton = findViewById<ImageButton>(R.id.mp_back)
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed() // This will navigate back
+        }
 
         findViewById<Button>(R.id.add_meal_button).setOnClickListener {
             showAddMealDialog()

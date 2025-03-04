@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.pulseplay.R
+import com.example.pulseplay.activity.MealPlanner
 import com.example.pulseplay.activity.Workout
-import com.example.pulseplay.activity.MealPlanner  // Import MealPlanner Activity
 
 class ActivityFragment : Fragment() {
 
