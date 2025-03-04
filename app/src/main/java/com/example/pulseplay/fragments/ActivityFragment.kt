@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.pulseplay.R
 import com.example.pulseplay.activity.MealPlanner
+import com.example.pulseplay.activity.SleepTracker
 import com.example.pulseplay.activity.Workout
 
 class ActivityFragment : Fragment() {
@@ -29,7 +30,7 @@ class ActivityFragment : Fragment() {
         val work3 = view.findViewById<ImageView>(R.id.work3)
         val work4 = view.findViewById<ImageView>(R.id.work4)
         val mealPlannerNav = view.findViewById<ImageView>(R.id.meal_planer_nav) // Find Meal Planner Button
-
+        val sleepTrackerNav = view.findViewById<ImageView>(R.id.sleep_tracker_nav)
         // Setting Click Listeners to Navigate to Workout Activity
         work1.setOnClickListener { startActivity(Intent(requireContext(), Workout::class.java)) }
         work2.setOnClickListener { startActivity(Intent(requireContext(), Workout::class.java)) }
@@ -39,6 +40,10 @@ class ActivityFragment : Fragment() {
         // Navigate to MealPlanner Activity
         mealPlannerNav.setOnClickListener {
             startActivity(Intent(requireContext(), MealPlanner::class.java))
+        }
+        // Navigate to SleepTracker Activity
+        sleepTrackerNav.setOnClickListener {
+            startActivity(Intent(requireContext(), SleepTracker::class.java))
         }
     }
 }
