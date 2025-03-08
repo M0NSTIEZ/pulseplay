@@ -41,6 +41,12 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.core.ktx.v190)
+    implementation(libs.androidx.appcompat.v170)
+    implementation(libs.material.v180)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -50,7 +56,12 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.tracing.perfetto.handshake)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.play.services.fitness)
+    implementation(libs.play.services.auth)
+
+
 }

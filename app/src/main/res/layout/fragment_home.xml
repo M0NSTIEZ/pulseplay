@@ -67,6 +67,30 @@
             android:layout_below="@id/bmi_title"
             android:layout_marginTop="5dp"/>
 
+        <!-- Steps Count -->
+        <TextView
+            android:id="@+id/tv_steps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Steps: 0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/bmi_description"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Calories Count -->
+        <TextView
+            android:id="@+id/tv_calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calories: 0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/tv_steps"
+            android:layout_marginTop="5dp"/>
+
         <!-- View More Button -->
         <Button
             android:id="@+id/btn_view_more"
@@ -111,6 +135,5 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
-
 
 </RelativeLayout>
