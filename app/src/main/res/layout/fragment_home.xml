@@ -78,47 +78,7 @@
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
-    <!-- Connect via Bluetooth Section -->
-    <RelativeLayout
-        android:id="@+id/bluetooth_card"
-        android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:layout_below="@id/bmi_card"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/bluetooth_backround"
-        android:padding="20dp">
 
-        <!-- Bluetooth Text -->
-        <TextView
-            android:id="@+id/bluetooth_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Connect via Bluetooth"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"/>
 
-        <!-- Check Button -->
-        <Button
-            android:id="@+id/btn_check_bluetooth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Check"
-            android:backgroundTint="#6200EE"
-            android:textColor="@android:color/white"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentBottom="true"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>
