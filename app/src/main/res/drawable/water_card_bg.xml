@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Rounded corners -->
+    <corners android:radius="20dp" />
+
+    <!-- Gradient background -->
+    <gradient
+        android:type="linear"
+        android:angle="270"
+        android:startColor="#FFFFFF"
+        android:endColor="#5DCCFC" />
+
+    <!-- Optional: subtle shadow using stroke and padding for effect -->
+    <padding android:left="4dp" android:top="4dp" android:right="4dp" android:bottom="4dp"/>
+    <stroke android:width="0dp" android:color="#00000000"/>
+</shape>

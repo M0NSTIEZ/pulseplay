@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/age_profile"
+    android:id="@+id/edit_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,16 +19,36 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
-    <!-- Illustration Image -->
-    <ImageView
-        android:id="@+id/illustration"
-        android:layout_width="250dp"
-        android:layout_height="180dp"
-        android:src="@drawable/updateprofile"
-        android:scaleType="fitCenter"
-        android:layout_below="@id/btn_back"
+    <!-- Profile Image + Camera Icon (overlayed) -->
+    <RelativeLayout
+        android:id="@+id/profile_picture_container"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@id/btn_back"
+        android:layout_marginTop="30dp">
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/illustration"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:src="@drawable/user_profile"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circlebg" />
+
+        <!-- Camera Icon -->
+        <ImageView
+            android:id="@+id/btn_upload_pic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/editprof"
+        android:background="@drawable/circlebg"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="4dp"
+        android:padding="6dp" />
+    </RelativeLayout>
 
     <!-- Title -->
     <TextView
@@ -39,7 +59,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_below="@id/illustration"
+        android:layout_below="@id/profile_picture_container"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 
@@ -55,6 +75,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"/>
 
+    <!-- Username Input -->
     <LinearLayout
         android:id="@+id/username_profile"
         android:layout_width="match_parent"
@@ -75,6 +96,8 @@
             android:background="@null"
             android:paddingStart="8dp"/>
     </LinearLayout>
+
+    <!-- Bio Input -->
     <LinearLayout
         android:id="@+id/bio_profile"
         android:layout_width="match_parent"
@@ -97,8 +120,7 @@
             android:paddingStart="8dp"/>
     </LinearLayout>
 
-
-
+    <!-- Height Input -->
     <LinearLayout
         android:id="@+id/height_profile"
         android:layout_width="match_parent"
@@ -111,8 +133,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/swap"
-            />
+            android:src="@drawable/swap"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,6 +141,8 @@
             android:background="@null"
             android:paddingStart="8dp"/>
     </LinearLayout>
+
+    <!-- Weight Input -->
     <LinearLayout
         android:id="@+id/weight_profile"
         android:layout_width="match_parent"
@@ -132,8 +155,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/scale"
-            />
+            android:src="@drawable/scale"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,6 +164,7 @@
             android:paddingStart="8dp"/>
     </LinearLayout>
 
+    <!-- Age Input -->
     <LinearLayout
         android:id="@+id/age_profile"
         android:layout_width="match_parent"
@@ -154,8 +177,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/calendar"
-            />
+            android:src="@drawable/calendar"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -163,19 +185,18 @@
             android:background="@null"
             android:paddingStart="8dp"/>
     </LinearLayout>
-        <Button
-            android:id="@+id/btn_save"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Save"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/purple"
-            android:layout_below="@id/age_profile"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="16dp"/>
-    </RelativeLayout>
 
-
-
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Save"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/purple"
+        android:layout_below="@id/age_profile"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"/>
+</RelativeLayout>

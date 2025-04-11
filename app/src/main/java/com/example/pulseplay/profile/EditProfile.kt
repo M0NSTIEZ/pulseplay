@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pulseplay.R
 
@@ -26,6 +27,12 @@ class EditProfile : AppCompatActivity() {
             // Add save functionality
             finish()
         }
+        val uploadBtn = findViewById<ImageView>(R.id.btn_upload_pic)
+
+        uploadBtn.setOnClickListener {
+            // TODO: Launch image picker here
+        }
+
 
         // Apply Window Insets (Fix Null Reference)
         val rootView = findViewById<View>(R.id.age_profile) // Replace with actual root ID

@@ -17,18 +17,7 @@
         <activity
             android:name=".activity.MealPlanner"
             android:exported="false" />
-        <activity
-            android:name=".WelcomeScreen5"
-            android:exported="false" />
-        <activity
-            android:name=".WelcomeScreen4"
-            android:exported="false" />
-        <activity
-            android:name=".WelcomeScreen3"
-            android:exported="false" />
-        <activity
-            android:name=".WelcomeScreen2"
-            android:exported="false" />
+
         <activity
             android:name=".activity.Workout"
             android:exported="false" />
