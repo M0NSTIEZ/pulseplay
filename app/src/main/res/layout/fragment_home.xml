@@ -25,7 +25,7 @@
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Butch Sykes"
+            android:text="Default Name"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginStart="20dp" />

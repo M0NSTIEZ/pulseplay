@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+
 import com.example.pulseplay.R
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -13,6 +15,7 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
 
@@ -26,9 +29,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val barChart = view.findViewById<BarChart>(R.id.bar_chart)
+        // Get Firebase user and display name
+        val user = FirebaseAuth.getInstance().currentUser
+        val name = user?.displayName ?: "User"
 
-        // Create bar entries
+        // Set display name to the TextView
+        val userNameTextView = view.findViewById<TextView>(R.id.user_name)
+        userNameTextView.text = "Welcome, $name!"
+
+        // Chart code
+        val barChart = view.findViewById<BarChart>(R.id.bar_chart)
         val entries = listOf(
             BarEntry(0f, 4f),
             BarEntry(1f, 8f),
@@ -43,18 +53,14 @@ class HomeFragment : Fragment() {
             valueTextSize = 14f
         }
 
-        val barData = BarData(dataSet)
-
-        // Apply to chart
         barChart.apply {
-            data = barData
+            data = BarData(dataSet)
             setFitBars(true)
             setBackgroundColor(Color.WHITE)
             description.isEnabled = false
             legend.isEnabled = true
             animateY(1000)
 
-            // X Axis
             xAxis.apply {
                 position = XAxis.XAxisPosition.BOTTOM
                 granularity = 1f

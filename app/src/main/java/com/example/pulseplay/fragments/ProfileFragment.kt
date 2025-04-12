@@ -1,6 +1,6 @@
 package com.example.pulseplay.fragments
 
-import android.content.Context
+import  android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import com.example.pulseplay.MainActivity  // Only this import is needed
+import com.example.pulseplay.MainActivity
 import com.example.pulseplay.R
 import com.example.pulseplay.profile.EditProfile
 import com.google.firebase.auth.FirebaseAuth
@@ -24,7 +25,15 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        // Profile More button
+        // 🔓 Get the logged-in user and display name
+        val user = FirebaseAuth.getInstance().currentUser
+        val name = user?.displayName ?: "User"
+
+        // 📝 Set name to the profile_name TextView
+        val nameTextView = view.findViewById<TextView>(R.id.profile_name)
+        nameTextView.text = name
+
+        // Profile Edit (More) button
         val profileMore = view.findViewById<ImageView>(R.id.profilemore1)
         profileMore.setOnClickListener {
             startActivity(Intent(requireActivity(), EditProfile::class.java))
@@ -50,13 +59,14 @@ class ProfileFragment : Fragment() {
     }
 
     private fun performLogout() {
-        // Example using SharedPreferences
+        // Clear local session (if any)
         val prefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         prefs.edit().clear().apply()
 
-// If using Firebase Auth
+        // Firebase logout
         FirebaseAuth.getInstance().signOut()
-        // Navigate back to MainActivity (which is your login screen)
+
+        // Redirect to login screen
         val intent = Intent(requireActivity(), MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }

@@ -16,10 +16,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthException
-import com.google.firebase.auth.ktx.auth
+
+import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
 
-class MainActivity<FirebaseAuthInvalidUserException> : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var etEmail: TextInputEditText
@@ -29,9 +30,10 @@ class MainActivity<FirebaseAuthInvalidUserException> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
+        FirebaseApp.initializeApp(this)
         // Initialize Firebase Auth
-        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance()
+
 
         // Initialize views
         etEmail = findViewById(R.id.et_email)
@@ -91,8 +93,6 @@ class MainActivity<FirebaseAuthInvalidUserException> : AppCompatActivity() {
             else -> true
         }
     }
-
-
 
     private fun loginUser(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
