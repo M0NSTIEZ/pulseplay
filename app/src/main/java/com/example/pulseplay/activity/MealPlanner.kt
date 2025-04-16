@@ -1,65 +1,77 @@
 package com.example.pulseplay.activity
 
-import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.pulseplay.R
-import com.example.pulseplay.adapter.MealAdapter
-import com.example.pulseplay.models.Meal
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
 class MealPlanner : AppCompatActivity() {
 
-    private lateinit var mealRecyclerView: RecyclerView
-    private lateinit var mealAdapter: MealAdapter
-    private val mealList = mutableListOf<Meal>()
-
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meal_planner)
 
-        mealRecyclerView = findViewById(R.id.mealRecyclerView)
-        mealAdapter = MealAdapter(mealList)
-
-        mealRecyclerView.layoutManager = LinearLayoutManager(this)
-        mealRecyclerView.adapter = mealAdapter
-
-        // ✅ Find back button outside of add_meal_button click
         val backButton = findViewById<ImageButton>(R.id.mp_back)
-        backButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed() // This will navigate back
+        backButton?.setOnClickListener {
+            finish()
         }
 
-        findViewById<Button>(R.id.add_meal_button).setOnClickListener {
-            showAddMealDialog()
-        }
+        setupBarChart()
     }
 
-    private fun showAddMealDialog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_meal, null)
-        val mealInput = dialogView.findViewById<EditText>(R.id.mealInput)
-        val timeInput = dialogView.findViewById<EditText>(R.id.timeInput)
+    private fun setupBarChart() {
+        val barChart = findViewById<BarChart>(R.id.bar_chart)
 
-        AlertDialog.Builder(this)
-            .setTitle("Add Meal")
-            .setView(dialogView)
-            .setPositiveButton("Add") { _, _ ->
-                val mealName = mealInput.text.toString()
-                val mealTime = timeInput.text.toString()
+        val entries = listOf(
+            BarEntry(0f, 320f),
+            BarEntry(1f, 450f),
+            BarEntry(2f, 300f),
+            BarEntry(3f, 600f),
+            BarEntry(4f, 500f),
+            BarEntry(5f, 700f),
+            BarEntry(6f, 280f)
+        )
 
-                if (mealName.isNotEmpty() && mealTime.isNotEmpty()) {
-                    mealList.add(Meal(mealName, mealTime))
-                    mealAdapter.notifyDataSetChanged()
-                }
-            }
-            .setNegativeButton("Cancel", null)
-            .show()
+        val dataSet = BarDataSet(entries, "Calories Burned (kcal)").apply {
+            colors = listOf(
+                Color.parseColor("#FF6B6B"), // Red
+                Color.parseColor("#FF8C42"), // Orange
+                Color.parseColor("#FFA94D"),
+                Color.parseColor("#FF6B6B"),
+                Color.parseColor("#FF8C42"),
+                Color.parseColor("#FFA94D"),
+                Color.parseColor("#FF6B6B")
+            )
+            valueTextColor = Color.BLACK
+            valueTextSize = 14f
+        }
+
+        val data = BarData(dataSet)
+        barChart.data = data
+
+        val days = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+
+        barChart.xAxis.apply {
+            valueFormatter = IndexAxisValueFormatter(days)
+            position = XAxis.XAxisPosition.BOTTOM
+            granularity = 1f
+            setDrawGridLines(false)
+        }
+
+        barChart.axisLeft.setDrawGridLines(false)
+        barChart.axisRight.isEnabled = false
+
+        barChart.description.isEnabled = false
+        barChart.legend.isEnabled = true
+        barChart.setFitBars(true)
+        barChart.animateY(1000)
+        barChart.invalidate()
     }
 }
