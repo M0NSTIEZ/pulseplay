@@ -61,7 +61,7 @@
                 android:id="@+id/profile_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Burn Calories Enjoyer"
+                android:text=""
                 android:textSize="14sp"
                 android:textColor="#828282" />
         </LinearLayout>
@@ -105,9 +105,10 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/user_height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="180cm"
+                android:text=""
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
@@ -135,9 +136,10 @@
             android:layout_marginEnd="8dp">
 
             <TextView
+                android:id="@+id/user_weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="65kg"
+                android:text=""
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
@@ -163,9 +165,10 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/user_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="22yo"
+                android:text=""
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
