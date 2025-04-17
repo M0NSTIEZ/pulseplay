@@ -97,12 +97,9 @@ class MealPlanner : AppCompatActivity() {
                 val name = nameInput.text.toString().trim()
                 val time = timeInput.text.toString().trim()
                 if (name.isNotEmpty() && time.isNotEmpty()) {
-                    // add to list, update adapter...
-                    mealList.add(Meal(name, time))
-                    mealAdapter.updateMeals(mealList)
-                    // ...and scroll to bottom so you see it:
-                    binding.mealRecyclerView.visibility = View.VISIBLE
-                    binding.mealRecyclerView.scrollToPosition(mealList.size - 1)
+                    val newMeal = Meal(name, time)
+                    mealAdapter.addMeal(newMeal)  // Add meal and notify adapter
+                    binding.mealRecyclerView.scrollToPosition(mealList.size - 1) // Scroll to the bottom
                 } else {
                     Toast.makeText(this,
                         "Please enter both meal name and time",
@@ -113,4 +110,5 @@ class MealPlanner : AppCompatActivity() {
             .setNegativeButton("Cancel", null)
             .show()
     }
+
 }

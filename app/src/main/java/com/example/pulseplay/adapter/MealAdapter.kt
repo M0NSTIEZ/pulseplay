@@ -26,15 +26,21 @@ class MealAdapter(private val mealList: MutableList<Meal>) :
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         val meal = mealList[position]
-        Log.d("MealAdapter", "Binding \"${meal.name}\" at position $position")
+        Log.d("MealAdapter", "Binding meal: ${meal.name} at position $position")
 
         holder.mealName.text = meal.name
         holder.mealTime.text = meal.time
     }
 
     override fun getItemCount(): Int {
-        Log.d("MealAdapter", "Item count: ${mealList.size}")
+        Log.d("MealAdapter", "List size: ${mealList.size}")
         return mealList.size
+    }
+
+    // Add a new meal to the list and notify the adapter
+    fun addMeal(meal: Meal) {
+        mealList.add(meal)
+        notifyItemInserted(mealList.size - 1)  // Notify that an item was inserted at the end
     }
 
     // Update the entire list and notify the adapter
