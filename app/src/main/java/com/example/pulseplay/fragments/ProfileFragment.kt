@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.pulseplay.MainActivity
 import com.example.pulseplay.R
+import com.example.pulseplay.profile.Achievement
 import com.example.pulseplay.profile.EditProfile
 import com.google.firebase.auth.FirebaseAuth
 
@@ -34,10 +35,15 @@ class ProfileFragment : Fragment() {
         nameTextView.text = name
 
         // Profile Edit (More) button
-        val profileMore = view.findViewById<ImageView>(R.id.profilemore1)
-        profileMore.setOnClickListener {
+        val editProfile = view.findViewById<ImageView>(R.id.profilemore1)
+        editProfile.setOnClickListener {
             startActivity(Intent(requireActivity(), EditProfile::class.java))
         }
+        val achievement = view.findViewById<ImageView>(R.id.profilemore2)
+        achievement.setOnClickListener {
+            startActivity(Intent(requireActivity(), Achievement::class.java))
+        }
+
 
         // Logout button
         val logoutButton = view.findViewById<Button>(R.id.logout_button)

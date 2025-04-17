@@ -1,5 +1,6 @@
 package com.example.pulseplay.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pulseplay.R
 import com.example.pulseplay.models.Meal
 
-class MealAdapter(private var mealList: MutableList<Meal>) :
+class MealAdapter(private val mealList: MutableList<Meal>) :
     RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
 
-    class MealViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val mealName: TextView = view.findViewById(R.id.mealName)
-        val mealTime: TextView = view.findViewById(R.id.mealTime)
+    // ViewHolder class holds item views
+    class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val mealName: TextView = itemView.findViewById(R.id.mealName)
+        val mealTime: TextView = itemView.findViewById(R.id.mealTime)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
@@ -24,14 +26,20 @@ class MealAdapter(private var mealList: MutableList<Meal>) :
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         val meal = mealList[position]
+        Log.d("MealAdapter", "Binding \"${meal.name}\" at position $position")
+
         holder.mealName.text = meal.name
         holder.mealTime.text = meal.time
     }
 
-    override fun getItemCount(): Int = mealList.size
+    override fun getItemCount(): Int {
+        Log.d("MealAdapter", "Item count: ${mealList.size}")
+        return mealList.size
+    }
 
-    // Function to update the list and refresh RecyclerView
+    // Update the entire list and notify the adapter
     fun updateMeals(newMeals: List<Meal>) {
+        Log.d("MealAdapter", "Updating meals: ${newMeals.size} items")
         mealList.clear()
         mealList.addAll(newMeals)
         notifyDataSetChanged()

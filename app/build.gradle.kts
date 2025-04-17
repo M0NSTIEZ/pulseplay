@@ -8,7 +8,9 @@ plugins {
 android {
     namespace = "com.example.pulseplay"
     compileSdk = 35
-
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "com.example.pulseplay"
         minSdk = 24
