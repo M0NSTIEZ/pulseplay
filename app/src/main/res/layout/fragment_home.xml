@@ -1,100 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!-- Greeting -->
-        <TextView
-            android:id="@+id/greeting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hi,"
-            android:textSize="16sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp" />
-
-        <!-- User Name -->
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Default Name"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginStart="20dp" />
-
-        <!-- Notification Icon -->
-        <ImageView
-            android:id="@+id/notification_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/notify"
-            android:layout_gravity="end"
-            android:layout_marginEnd="20dp" />
-        <!-- Bar Chart FIRST -->
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/bar_chart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="20dp"
-            tools:ignore="MissingClass" />
-
-        <!-- Water Card -->
+        <!-- Header Section -->
         <RelativeLayout
-            android:id="@+id/water_card"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/bar_chart"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/water_card_bg"
-            android:padding="20dp">
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/greeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hi,"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Butch Sykes"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
             <ImageView
-                android:id="@+id/wave_shape"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/wave_shape"
-                android:scaleType="fitXY"
-                android:layout_alignParentTop="true" />
-
-            <ImageView
-                android:id="@+id/drop_big"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/drop1"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="200dp" />
-
-            <ImageView
-                android:id="@+id/drop_small"
+                android:id="@+id/notification_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/drop2"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="40dp" />
+                android:src="@drawable/notify"/>
         </RelativeLayout>
 
-        <!-- BMI Card (moved down here) -->
+        <!-- BMI Section -->
         <RelativeLayout
-            android:id="@+id/bmi_card"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@id/water_card"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/bmi_backround"
             android:padding="20dp">
 
@@ -103,29 +59,248 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BMI (Body Mass Index)"
+                android:textColor="@android:color/white"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/bmi_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You have a normal weight"
-                android:textSize="14sp"
-                android:textColor="@android:color/white"
                 android:layout_below="@id/bmi_title"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="8dp"
+                android:text="You have a normal weight"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"/>
 
             <Button
                 android:id="@+id/btn_view_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:text="View More"
-                android:backgroundTint="@color/purple"
                 android:textColor="@android:color/white"
-                android:layout_alignParentBottom="true" />
+                android:backgroundTint="@color/purple"/>
         </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:background="@drawable/bluetooth_background">
+
+        <TextView
+            android:id="@+id/healthname"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health Hazard Prediction"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Three Circular Meters in a Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <!-- Heat Stroke Circle -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="8dp">
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+
+                    <ImageView
+                        android:id="@+id/heatStrokeCircleBg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/circle_background"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/heatStrokeValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="76%"
+                        android:textSize="18sp"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heat Stroke"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- Over Fatigue Circle -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="8dp">
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+
+                    <ImageView
+                        android:id="@+id/fatigueCircleBg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/circle_background"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/fatigueValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="51%"
+                        android:textSize="18sp"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Over Fatigue"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- Dehydration Circle -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="8dp">
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+
+                    <ImageView
+                        android:id="@+id/dehydrationCircleBg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/circle_background"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/dehydrationValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="25%"
+                        android:textSize="18sp"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dehydration"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+        <!-- Stats Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Total Steps Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Steps"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="81dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="/steps"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="end"/>
+            </LinearLayout>
+
+            <!-- Energy Burned Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_bg"
+                android:padding="16dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Energy Burned"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="81dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="/kcal"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="end"/>
+            </LinearLayout>
+
+            <!-- Heart Rate Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_bg"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heart Rate"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="81dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="/bpm"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="end"/>
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

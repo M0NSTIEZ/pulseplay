@@ -49,6 +49,7 @@ android {
 dependencies {
     // Charts
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.google.android.material:material:1.6.0")
 
     // Core AndroidX + Lifecycle
     implementation(libs.androidx.core.ktx)
