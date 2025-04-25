@@ -1,65 +1,114 @@
 package com.example.pulseplay.activity
 
-import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Button
+import android.view.View
 import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.pulseplay.R
 import com.example.pulseplay.adapter.MealAdapter
+import com.example.pulseplay.databinding.ActivityMealPlannerBinding
 import com.example.pulseplay.models.Meal
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
 class MealPlanner : AppCompatActivity() {
 
-    private lateinit var mealRecyclerView: RecyclerView
-    private lateinit var mealAdapter: MealAdapter
+    private lateinit var binding: ActivityMealPlannerBinding
     private val mealList = mutableListOf<Meal>()
+    private lateinit var mealAdapter: MealAdapter
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meal_planner)
+        binding = ActivityMealPlannerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        mealRecyclerView = findViewById(R.id.mealRecyclerView)
+        // 1️⃣ RecyclerView setup
         mealAdapter = MealAdapter(mealList)
-
-        mealRecyclerView.layoutManager = LinearLayoutManager(this)
-        mealRecyclerView.adapter = mealAdapter
-
-        // ✅ Find back button outside of add_meal_button click
-        val backButton = findViewById<ImageButton>(R.id.mp_back)
-        backButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed() // This will navigate back
+        binding.mealRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MealPlanner)
+            adapter = mealAdapter
         }
 
-        findViewById<Button>(R.id.add_meal_button).setOnClickListener {
-            showAddMealDialog()
+        // 2️⃣ UI callbacks
+        binding.mpBack.setOnClickListener { finish() }
+        binding.checkButton.setOnClickListener {
+            Toast.makeText(this, "Check Button Clicked", Toast.LENGTH_SHORT).show()
+        }
+        binding.addMealButton.setOnClickListener { showAddMealDialog() }
+
+        // 3️⃣ Chart initialization
+        setupBarChart(binding.barChart)
+    }
+
+    private fun setupBarChart(barChart: BarChart) {
+        val entries = listOf(
+            BarEntry(0f, 320f), BarEntry(1f, 450f), BarEntry(2f, 300f),
+            BarEntry(3f, 600f), BarEntry(4f, 500f), BarEntry(5f, 700f),
+            BarEntry(6f, 280f)
+        )
+        val dataSet = BarDataSet(entries, "Calories Burned (kcal)").apply {
+            colors = listOf(
+                Color.parseColor("#FF6B6B"), Color.parseColor("#FF8C42"),
+                Color.parseColor("#FFA94D"), Color.parseColor("#FF6B6B"),
+                Color.parseColor("#FF8C42"), Color.parseColor("#FFA94D"),
+                Color.parseColor("#FF6B6B")
+            )
+            valueTextColor = Color.BLACK
+            valueTextSize = 14f
+        }
+        barChart.data = BarData(dataSet)
+        val days = listOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
+        barChart.xAxis.apply {
+            valueFormatter = IndexAxisValueFormatter(days)
+            position = XAxis.XAxisPosition.BOTTOM
+            granularity = 1f
+            setDrawGridLines(false)
+        }
+        barChart.apply {
+            axisLeft.setDrawGridLines(false)
+            axisRight.isEnabled = false
+            description.isEnabled = false
+            legend.isEnabled = true
+            setFitBars(true)
+            animateY(1000)
+            invalidate()
         }
     }
 
     private fun showAddMealDialog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_meal, null)
-        val mealInput = dialogView.findViewById<EditText>(R.id.mealInput)
+        val dialogView = LayoutInflater.from(this)
+            .inflate(R.layout.dialog_add_meal, null)
+        val nameInput = dialogView.findViewById<EditText>(R.id.mealInput)
         val timeInput = dialogView.findViewById<EditText>(R.id.timeInput)
 
         AlertDialog.Builder(this)
             .setTitle("Add Meal")
             .setView(dialogView)
-            .setPositiveButton("Add") { _, _ ->
-                val mealName = mealInput.text.toString()
-                val mealTime = timeInput.text.toString()
-
-                if (mealName.isNotEmpty() && mealTime.isNotEmpty()) {
-                    mealList.add(Meal(mealName, mealTime))
-                    mealAdapter.notifyDataSetChanged()
+            .setPositiveButton("Save") { _, _ ->
+                val name = nameInput.text.toString().trim()
+                val time = timeInput.text.toString().trim()
+                if (name.isNotEmpty() && time.isNotEmpty()) {
+                    val newMeal = Meal(name, time)
+                    mealAdapter.addMeal(newMeal)  // Add meal and notify adapter
+                    binding.mealRecyclerView.scrollToPosition(mealList.size - 1) // Scroll to the bottom
+                } else {
+                    Toast.makeText(this,
+                        "Please enter both meal name and time",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
             .setNegativeButton("Cancel", null)
             .show()
     }
+
 }

@@ -37,7 +37,7 @@
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="  E-mail"
         android:drawableStart="@drawable/message"
         android:padding="12dp"
         android:layout_marginTop="32dp"
@@ -50,7 +50,7 @@
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="  Password"
         android:drawableStart="@drawable/password"
         android:padding="12dp"
         android:layout_marginTop="16dp"
@@ -71,14 +71,14 @@
         android:layout_marginEnd="20dp"
         android:layout_below="@id/et_password" />
 
-
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_forgot_password"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
         android:backgroundTint="#7B47F2"
         android:drawableStart="@drawable/login"
         android:text="Login"

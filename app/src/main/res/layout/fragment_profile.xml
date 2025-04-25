@@ -48,32 +48,32 @@
             android:layout_marginStart="12dp"
             android:layout_centerVertical="true">
 
-            <TextView
-                android:id="@+id/profile_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Butch Sykes"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Butch Sykes"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Burn Calories Enjoyer"
+                android:text=""
                 android:textSize="14sp"
                 android:textColor="#828282" />
         </LinearLayout>
 
         <!-- Edit Button (Aligned to Right) -->
         <Button
-            android:id="@+id/edit_button"
+            android:id="@+id/logout_button"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:text="Edit"
+            android:text="logout"
             android:textSize="14sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/purple"
@@ -105,9 +105,10 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/user_height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="180cm"
+                android:text=""
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
@@ -135,9 +136,10 @@
             android:layout_marginEnd="8dp">
 
             <TextView
+                android:id="@+id/user_weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="65kg"
+                android:text=""
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
@@ -163,9 +165,10 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/user_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="22yo"
+                android:text=""
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/purple"
