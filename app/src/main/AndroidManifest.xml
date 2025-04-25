@@ -16,6 +16,9 @@
         android:theme="@style/Theme.PulsePlay"
         tools:targetApi="31">
         <activity
+            android:name=".profile.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
             android:name=".dashboard.BodyMassIndex"
             android:exported="false" />
         <activity

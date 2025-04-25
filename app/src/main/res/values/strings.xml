@@ -5,4 +5,39 @@
     <string name="title_activity">Activity</string>
     <string name="title_camera">Camera</string>
     <string name="title_profile">Profile</string>
+    <string name="privacy_policy_content">
+    <![CDATA[
+    <b>Last Updated:</b> [Insert Date]\n\n
+    <b>1. Introduction</b>\n
+    Our app respects your privacy and is committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you use our application.\n\n
+    <b>2. Data We Collect</b>\n
+    We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:\n
+    - Identity Data (name, username)\n
+    - Contact Data (email address)\n
+    - Technical Data (IP address, device information)\n
+    - Usage Data (how you use our app)\n\n
+    <b>3. How We Use Your Data</b>\n
+    We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:\n
+    - To provide and maintain our service\n
+    - To notify you about changes to our service\n
+    - To allow you to participate in interactive features\n
+    - To provide customer support\n\n
+    <b>4. Data Security</b>\n
+    We have implemented appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed.\n\n
+    <b>5. Data Retention</b>\n
+    We will only retain your personal data for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements.\n\n
+    <b>6. Your Legal Rights</b>\n
+    Under certain circumstances, you have rights under data protection laws in relation to your personal data including the right to:\n
+    - Request access to your personal data\n
+    - Request correction of your personal data\n
+    - Request erasure of your personal data\n
+    - Object to processing of your personal data\n
+    - Request restriction of processing your personal data\n\n
+    <b>7. Contact Us</b>\n
+    For any questions about this privacy policy or our privacy practices, please contact us at:\n
+    - Hazel Climaco: hclimaco98@gmail.com\n
+    - Jefferson Paul Valencia: jpaulcv1@gmail.com\n
+    - Butch Nino Butas: butchbutas1112@gmail.com\n\n
+    ]]>
+</string>
 </resources>
