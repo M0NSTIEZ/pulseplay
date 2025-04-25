@@ -24,9 +24,7 @@
         <activity
             android:name=".InputFormActivity"
             android:exported="false" />
-        <activity
-            android:name=".ResultsActivity"
-            android:exported="false" />
+
         <activity
             android:name=".profile.Achievement"
             android:exported="false" />
