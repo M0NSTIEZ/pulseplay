@@ -10,85 +10,140 @@
     android:gravity="center"
     tools:context=".InputFormActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Health Condition Analyzer"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginBottom="32dp"/>
-
-    <androidx.cardview.widget.CardView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        android:layout_marginBottom="24dp">
+        android:layout_height="230dp"
+        android:background="@drawable/bluetooth_background">
 
+        <TextView
+            android:id="@+id/healthname"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health Hazard Prediction"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Three Circular Meters in a Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
 
-            <TextView
-                android:layout_width="match_parent"
+            <!-- Heat Stroke Circle -->
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Condition to Analyze"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="8dp">
 
-            <RadioGroup
-                android:id="@+id/conditionRadioGroup"
-                android:layout_width="match_parent"
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+
+                    <ImageView
+                        android:id="@+id/heatStrokeCircleBg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/circle_background"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/heatStrokeValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="76%"
+                        android:textSize="18sp"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heat Stroke"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- Over Fatigue Circle -->
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="8dp">
 
-                <RadioButton
-                    android:id="@+id/heatStrokeRadio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Heat Stroke Risk"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp"/>
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
 
-                <RadioButton
-                    android:id="@+id/stressRadio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Stress Level"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp"/>
+                    <ImageView
+                        android:id="@+id/fatigueCircleBg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/circle_background"
+                        app:tint="@color/gray" />
 
-                <RadioButton
-                    android:id="@+id/dehydrationRadio"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/fatigueValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="51%"
+                        android:textSize="18sp"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hydration Status"
-                    android:textSize="16sp"/>
-            </RadioGroup>
+                    android:text="Over Fatigue"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- Dehydration Circle -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="8dp">
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp">
+
+                    <ImageView
+                        android:id="@+id/dehydrationCircleBg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/circle_background"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/dehydrationValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="25%"
+                        android:textSize="18sp"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dehydration"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/analyzeButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Analyze"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:backgroundTint="@color/purple_500"
-        android:textColor="@color/white"
-        android:layout_marginTop="16dp"
-        android:padding="12dp"/>
 
-    <ProgressBar
-        android:id="@+id/loadingProgress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:visibility="gone"/>
 </LinearLayout>
