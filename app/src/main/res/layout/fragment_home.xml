@@ -117,8 +117,8 @@
                 android:layout_margin="8dp">
 
                 <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
 
                     <ImageView
                         android:id="@+id/heatStrokeCircleBg"
@@ -153,8 +153,8 @@
                 android:layout_margin="8dp">
 
                 <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
 
                     <ImageView
                         android:id="@+id/fatigueCircleBg"
@@ -189,8 +189,8 @@
                 android:layout_margin="8dp">
 
                 <RelativeLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
 
                     <ImageView
                         android:id="@+id/dehydrationCircleBg"
