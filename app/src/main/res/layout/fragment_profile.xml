@@ -270,69 +270,7 @@
                     app:tint="@color/black" />
             </RelativeLayout>
 
-            <!-- Activity History -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="10dp">
 
-                <ImageView
-                    android:id="@+id/icon_activity_history"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentStart="true"
-                    android:src="@drawable/chart" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="12dp"
-                    android:layout_toEndOf="@id/icon_activity_history"
-                    android:text="Activity History"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/profilemore3"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/more"
-                    app:tint="@color/black" />
-            </RelativeLayout>
-
-            <!-- Workout Progress -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="10dp">
-
-                <ImageView
-                    android:id="@+id/icon_workout_progress"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentStart="true"
-                    android:src="@drawable/graph" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="12dp"
-                    android:layout_toEndOf="@id/icon_workout_progress"
-                    android:text="Workout Progress"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/profilemore4"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/more"
-                    app:tint="@color/black" />
-            </RelativeLayout>
 
         </LinearLayout>
 
