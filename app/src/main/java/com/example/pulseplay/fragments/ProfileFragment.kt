@@ -13,8 +13,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.pulseplay.MainActivity
 import com.example.pulseplay.R
+import com.example.pulseplay.auth.TokenManager
 import com.example.pulseplay.profile.Achievement
 import com.example.pulseplay.profile.EditProfile
+import com.example.pulseplay.repository.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
@@ -71,6 +73,12 @@ class ProfileFragment : Fragment() {
 
         // Firebase logout
         FirebaseAuth.getInstance().signOut()
+
+        // Clear the API token
+        TokenManager.clearToken()
+
+        // Clear any local user data
+        UserRepository.clearUserData()
 
         // Redirect to login screen
         val intent = Intent(requireActivity(), MainActivity::class.java).apply {

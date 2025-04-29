@@ -40,4 +40,13 @@
     - Butch Nino Butas: butchbutas1112@gmail.com\n\n
     ]]>
 </string>
+    <string-array name="gender_options">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="cardiovascular_options">
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
 </resources>
