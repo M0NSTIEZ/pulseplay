@@ -94,5 +94,112 @@
             />
     </LinearLayout>
 
+    <!-- Sleep Education Content (ScrollView) -->
+    <ScrollView
+        android:id="@+id/sleep_info_scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/sleep_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_margin="20dp"
+            android:background="@android:color/white">
+
+            <!-- 💤 What Is Sleep? -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💤 What Is Sleep?"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sleep is a natural and essential state of rest for the body and mind. During sleep, your body becomes less responsive to the outside world, and your brain goes through different cycles that help restore physical and mental health."
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 🧠 Why Do We Sleep? -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🧠 Why Do We Sleep?"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sleep allows the body to:\n• Repair muscles and tissues\n• Boost immune function\n• Process and store memories\n• Regulate emotions\n• Maintain brain function and learning ability\n\nWithout enough sleep, people may experience poor concentration, weakened immunity, and increased risk of chronic diseases."
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 🌀 Stages of Sleep -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🌀 Stages of Sleep"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sleep occurs in repeating cycles made of four main stages:\n\n• Stage 1 (Light Sleep) – Transition between wakefulness and sleep\n• Stage 2 (Light Sleep) – Heart rate slows, body temperature drops\n• Stage 3 (Deep Sleep) – Physical restoration, cell repair\n• REM Sleep (Rapid Eye Movement) – Dreaming occurs, brain is active, helps with memory and learning\n\nEach cycle lasts about 90 minutes and repeats several times per night."
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- ⏰ How Much Sleep Do You Need? -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⏰ How Much Sleep Do You Need?"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Newborns: 14–17 hours\n• Children (6–13 years): 9–11 hours\n• Teens: 8–10 hours\n• Adults: 7–9 hours\n• Older adults: 7–8 hours"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 🌙 Benefits of Good Sleep -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🌙 Benefits of Good Sleep"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Improves memory and learning\n• Enhances mood and emotional health\n• Boosts creativity and problem-solving\n• Reduces risk of heart disease and diabetes\n• Helps with weight management"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
