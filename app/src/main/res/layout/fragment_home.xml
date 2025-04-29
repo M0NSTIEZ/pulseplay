@@ -33,7 +33,7 @@
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Butch Sykes"
+                    android:text="User Name"
                     android:textSize="22sp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -91,6 +91,7 @@
 
         <TextView
             android:id="@+id/healthname"
+            android:textColor="@color/cyan"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
@@ -140,6 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Heat Stroke"
+                    android:textColor="@color/cyan"
                     android:textSize="14sp"
                     android:layout_marginTop="8dp"/>
             </LinearLayout>
@@ -176,6 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Over Fatigue"
+                    android:textColor="@color/cyan"
                     android:textSize="14sp"
                     android:layout_marginTop="8dp"/>
             </LinearLayout>
@@ -212,6 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dehydration"
+                    android:textColor="@color/cyan"
                     android:textSize="14sp"
                     android:layout_marginTop="8dp"/>
             </LinearLayout>
@@ -237,6 +241,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total Steps"
+                    android:textColor="@color/cyan"
                     android:textSize="16sp"
                     android:layout_marginEnd="81dp"/>
 
@@ -264,6 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Energy Burned"
+                    android:textColor="@color/cyan"
                     android:textSize="16sp"
                     android:layout_marginEnd="81dp"/>
 
@@ -289,6 +295,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Heart Rate"
+                    android:textColor="@color/cyan"
                     android:textSize="16sp"
                     android:layout_marginEnd="81dp"/>
 
@@ -313,6 +320,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Avg. Sleep"
+                    android:textColor="@color/cyan"
                     android:textSize="16sp"
                     android:layout_marginEnd="81dp"/>
 
@@ -338,6 +346,7 @@
                     android:layout_height="wrap_content"
                     android:text="Avg. Walking HR"
                     android:textSize="16sp"
+                    android:textColor="@color/cyan"
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
@@ -362,6 +371,7 @@
                     android:layout_height="wrap_content"
                     android:text="Avg. Blood Pressure"
                     android:textSize="16sp"
+                    android:textColor="@color/cyan"
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
@@ -386,6 +396,7 @@
                     android:layout_height="wrap_content"
                     android:text="Avg. Body Temp"
                     android:textSize="16sp"
+                    android:textColor="@color/cyan"
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
@@ -410,6 +421,7 @@
                     android:layout_height="wrap_content"
                     android:text="Avg. Respiratory Rate"
                     android:textSize="16sp"
+                    android:textColor="@color/cyan"
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
@@ -434,6 +446,7 @@
                     android:layout_height="wrap_content"
                     android:text="Avg. Oxygen Sat"
                     android:textSize="16sp"
+                    android:textColor="@color/cyan"
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
@@ -458,6 +471,7 @@
                     android:layout_height="wrap_content"
                     android:text="Avg. Body Mass"
                     android:textSize="16sp"
+                    android:textColor="@color/cyan"
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
@@ -481,6 +495,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Avg. BMI"
+                    android:textColor="@color/cyan"
                     android:textSize="16sp"
                     android:layout_marginEnd="81dp"/>
 
@@ -506,6 +521,7 @@
                     android:layout_height="wrap_content"
                     android:text="Avg. Fat Percentage"
                     android:textSize="16sp"
+                    android:textColor="@color/cyan"
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
@@ -530,6 +546,7 @@
                     android:layout_height="wrap_content"
                     android:text="Avg. Calories Consumed"
                     android:textSize="16sp"
+                    android:textColor="@color/cyan"
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
