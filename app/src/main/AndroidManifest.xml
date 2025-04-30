@@ -49,6 +49,9 @@
 
         <!-- Activities -->
         <activity
+            android:name=".dashboard.HeartRate"
+            android:exported="false" />
+        <activity
             android:name=".dashboard.TotalSteps"
             android:exported="false" />
         <activity
