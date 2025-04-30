@@ -5,14 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.pulseplay.R
+import com.example.pulseplay.Register
 import com.example.pulseplay.dashboard.BodyMassIndex
+import com.example.pulseplay.dashboard.TotalSteps
 import com.example.pulseplay.repository.UserRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -38,8 +42,16 @@ class HomeFragment : Fragment() {
         refreshData()
 
         // BMI Section Click Listener
-        view.findViewById<View>(R.id.btn_view_more).setOnClickListener {
+        val bmibutton = view.findViewById<Button>(R.id.btn_view_more)
+
+        bmibutton.setOnClickListener {
             startActivity(Intent(requireContext(), BodyMassIndex::class.java))
+        }
+
+        val totalStepsLayout = view.findViewById<LinearLayout>(R.id.total_steps)
+        totalStepsLayout.setOnClickListener {
+            val intent = Intent(requireContext(), TotalSteps::class.java)
+            startActivity(intent)
         }
     }
 
