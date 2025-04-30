@@ -13,7 +13,7 @@
     <color name="red">#FF0000</color>
     <color name="green">#00FF00</color>
     <color name="orange">#FFA500</color>
-
+    <color name="cyan">#00FFFF</color>
     <color name="high_risk_red">#FF5252</color>
     <color name="medium_risk_orange">#FFA726</color>
     <color name="low_risk_green">#66BB6A</color>
