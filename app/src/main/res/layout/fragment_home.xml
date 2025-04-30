@@ -257,32 +257,7 @@
                     android:gravity="end"/>
             </LinearLayout>
 
-            <!-- Energy Burned Card -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/rounded_bg"
-                android:padding="16dp"
-                android:layout_marginBottom="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Energy Burned"
-                    android:textColor="@color/cyan"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="81dp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="/kcal"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:gravity="end"/>
-            </LinearLayout>
 
             <!-- Heart Rate Card -->
             <LinearLayout
@@ -309,31 +284,7 @@
                     android:textStyle="bold"
                     android:gravity="end"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/rounded_bg"
-                android:padding="16dp"
-                android:layout_marginBottom="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Avg. Sleep"
-                    android:textColor="@color/cyan"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="81dp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="/per night"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:gravity="end"/>
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -459,56 +410,8 @@
                     android:textStyle="bold"
                     android:gravity="end"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/rounded_bg"
-                android:padding="16dp"
-                android:layout_marginBottom="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Avg. Body Mass"
-                    android:textSize="16sp"
-                    android:textColor="@color/cyan"
-                    android:layout_marginEnd="81dp"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="/kg"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:gravity="end"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/rounded_bg"
-                android:padding="16dp"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Avg. BMI"
-                    android:textColor="@color/cyan"
-                    android:textSize="16sp"
-                    android:layout_marginEnd="81dp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="/kg/m²"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:gravity="end"/>
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
