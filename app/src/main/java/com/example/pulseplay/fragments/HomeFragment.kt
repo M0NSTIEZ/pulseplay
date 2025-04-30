@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+
 class HomeFragment : Fragment() {
 
     override fun onCreateView(
@@ -43,7 +44,6 @@ class HomeFragment : Fragment() {
 
         // BMI Section Click Listener
         val bmibutton = view.findViewById<Button>(R.id.btn_view_more)
-
         bmibutton.setOnClickListener {
             startActivity(Intent(requireContext(), BodyMassIndex::class.java))
         }
