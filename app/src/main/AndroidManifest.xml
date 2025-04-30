@@ -4,8 +4,28 @@
     package="com.example.pulseplay">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.front" />
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <!-- For Android 10+, add this to request legacy storage -->
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"
+        tools:ignore="WrongManifestParent" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera2" android:required="true" />
+    <uses-feature android:name="android.hardware.camera2.full" android:required="false" />
+    <uses-feature android:name="android.hardware.camera2.autofocus" android:required="false" />
+
+    <!-- Optional: if your app requires specific camera features -->
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:name=".PulsePlayApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +36,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulsePlay"
         tools:targetApi="31">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Activities -->
         <activity
             android:name=".dashboard.TotalSteps"
             android:exported="false" />
@@ -28,7 +60,6 @@
         <activity
             android:name=".InputFormActivity"
             android:exported="false" />
-
         <activity
             android:name=".profile.Achievement"
             android:exported="false" />
@@ -51,15 +82,16 @@
         <activity
             android:name=".Register"
             android:exported="false" />
+
+        <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
