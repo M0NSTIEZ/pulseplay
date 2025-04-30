@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.pulseplay.R
 import com.example.pulseplay.Register
 import com.example.pulseplay.dashboard.BodyMassIndex
+import com.example.pulseplay.dashboard.HeartRate
 import com.example.pulseplay.dashboard.TotalSteps
 import com.example.pulseplay.repository.UserRepository
 import kotlinx.coroutines.launch
@@ -51,6 +52,11 @@ class HomeFragment : Fragment() {
         val totalStepsLayout = view.findViewById<LinearLayout>(R.id.total_steps)
         totalStepsLayout.setOnClickListener {
             val intent = Intent(requireContext(), TotalSteps::class.java)
+            startActivity(intent)
+        }
+        val heartrate = view.findViewById<LinearLayout>(R.id.heart_rate)
+        heartrate.setOnClickListener {
+            val intent = Intent(requireContext(), HeartRate::class.java)
             startActivity(intent)
         }
     }
