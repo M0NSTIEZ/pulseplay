@@ -7,10 +7,25 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.pulseplay.R
+import com.example.pulseplay.Register
+import com.example.pulseplay.dashboard.BodyMassIndex
+import com.example.pulseplay.dashboard.HeartRate
+import com.example.pulseplay.dashboard.TotalSteps
+import com.example.pulseplay.repository.UserRepository
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import com.example.pulseplay.databinding.FragmentHomeBinding
 import com.example.pulseplay.notification.NotificationActivity
 
@@ -32,13 +47,55 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set initial UI with cached data
+        updateUI()
+
+        // Fetch fresh data
+        refreshData()
+
+        // BMI Section Click Listener
+        val bmibutton = view.findViewById<Button>(R.id.btn_view_more)
+        bmibutton.setOnClickListener {
+            startActivity(Intent(requireContext(), BodyMassIndex::class.java))
+        }
+
+        val totalStepsLayout = view.findViewById<LinearLayout>(R.id.total_steps)
+        totalStepsLayout.setOnClickListener {
+            val intent = Intent(requireContext(), TotalSteps::class.java)
+            startActivity(intent)
+        }
+        val heartrate = view.findViewById<LinearLayout>(R.id.heart_rate)
+        heartrate.setOnClickListener {
+            val intent = Intent(requireContext(), HeartRate::class.java)
+            startActivity(intent)
+        }
         setupNotificationBadge()
         setupNotificationClickListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh data when fragment comes back into view
+        refreshData()
     }
 
     private fun setupNotificationBadge() {
         // Example: Show 3 notifications (replace with your actual count)
         updateNotificationBadge(3)
+    }
+
+    private fun refreshData() {
+        lifecycleScope.launch {
+            try {
+                // Show loading state if needed
+                UserRepository.fetchUserData()
+                UserRepository.fetchPredictions()
+                updateUI()
+            } catch (e: Exception) {
+                // Handle error (show toast or error message)
+                Toast.makeText(context, "Failed to refresh data", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setupNotificationClickListener() {
@@ -47,6 +104,63 @@ class HomeFragment : Fragment() {
             startActivity(intent)
             // Clear badge when notifications are viewed
             updateNotificationBadge(0)
+        }
+    }
+
+    private fun updateUI() {
+        val user = UserRepository.getUser()
+        val userDetails = UserRepository.getUserDetails()
+
+        println("User: $user")
+        println("User Details: $userDetails")
+
+        binding.userName.text = "${user?.fullName ?: "User"}"
+
+        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        val healthData = UserRepository.getHealthData()
+
+        healthData?.let { data ->
+            // Find latest entries for current date
+            val latestSteps = data.stepCount.lastOrNull { it.date == currentDate }
+            val latestEnergy = data.activeEnergyBurned.lastOrNull { it.date == currentDate }
+            val latestHeartRate = data.heartRate.lastOrNull { it.date == currentDate }
+
+            binding.totalStepsValue.text = latestSteps?.value.toString() + " /steps"
+
+            println("Latest Steps: $latestSteps")
+            println("Latest Energy: $latestEnergy")
+            println("Latest Heart Rate: $latestHeartRate")
+        }
+
+        // Update prediction circles
+        val dehydrationRisk = UserRepository.getDehydrationPrediction()
+        val heatStrokeRisk = UserRepository.getHeatStrokePrediction()
+        val stressRisk = UserRepository.getStressPrediction()
+
+        println("Dehydration Risk: $dehydrationRisk")
+        println("Heat Stroke Risk: $heatStrokeRisk")
+        println("Stress Risk: $stressRisk")
+
+        binding.dehydrationValue.text = "${(dehydrationRisk?.times(100))?.toInt() ?: 0}%"
+        binding.heatStrokeValue.text = "${(heatStrokeRisk?.times(100))?.toInt() ?: 0}%"
+        binding.fatigueValue.text = "${(stressRisk?.times(100))?.toInt() ?: 0}%"
+
+        // Update circle colors based on risk level
+        updateRiskCircle(binding.dehydrationCircleBg, dehydrationRisk)
+        updateRiskCircle(binding.heatStrokeCircleBg, heatStrokeRisk)
+        updateRiskCircle(binding.fatigueCircleBg, stressRisk)
+    }
+
+    private fun updateRiskCircle(circleView: ImageView, risk: Double?) {
+        risk?.let {
+            val color = when {
+                it > 0.7 -> R.color.high_risk_red
+                it > 0.4 -> R.color.medium_risk_orange
+                else -> R.color.low_risk_green
+            }
+            circleView.setColorFilter(
+                ContextCompat.getColor(requireContext(), color)
+            )
         }
     }
 
@@ -63,10 +177,8 @@ class HomeFragment : Fragment() {
                 setTextColor(Color.WHITE)
                 textSize = 12f
                 setBackgroundResource(R.drawable.badge_background)
-
                 // Add padding for better appearance
                 setPadding(8.dpToPx(), 4.dpToPx(), 8.dpToPx(), 4.dpToPx())
-
                 // Ensure text is centered
                 gravity = Gravity.CENTER
             }
@@ -77,7 +189,6 @@ class HomeFragment : Fragment() {
             ).apply {
                 // Position badge on top-right of icon
                 gravity = Gravity.END or Gravity.TOP
-
                 // Adjust these values to fine-tune position:
                 topMargin = (-5).dpToPx()  // Negative to overlap icon
                 marginEnd = (-5).dpToPx()  // Negative to overlap icon
