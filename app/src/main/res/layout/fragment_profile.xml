@@ -353,6 +353,7 @@
 
         <!-- Contact Us -->
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="10dp">
@@ -375,7 +376,8 @@
                 android:textColor="@color/gray" />
 
             <ImageView
-                android:id="@+id/more_message"
+
+                android:id="@+id/contact_us"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
@@ -385,6 +387,7 @@
 
         <!-- Privacy Policy -->
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="10dp">

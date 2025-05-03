@@ -1,5 +1,6 @@
 package com.example.pulseplay.fragments
 
+import android.annotation.SuppressLint
 import  android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,12 +16,15 @@ import com.example.pulseplay.MainActivity
 import com.example.pulseplay.R
 import com.example.pulseplay.auth.TokenManager
 import com.example.pulseplay.profile.Achievement
+import com.example.pulseplay.profile.ContactUsActivity
 import com.example.pulseplay.profile.EditProfile
+import com.example.pulseplay.profile.PrivacyPolicyActivity
 import com.example.pulseplay.repository.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +49,19 @@ class ProfileFragment : Fragment() {
         achievement.setOnClickListener {
             startActivity(Intent(requireActivity(), Achievement::class.java))
         }
+        val contactus = view.findViewById<ImageView>(R.id.contact_us)
+        contactus.setOnClickListener {
+            startActivity(Intent(requireActivity(),ContactUsActivity::class.java))
+        }
+        val privacy = view.findViewById<ImageView>(R.id.more_privacy)
+       privacy.setOnClickListener {
+            startActivity(Intent(requireActivity(),PrivacyPolicyActivity::class.java))
+        }
+//        val settings = view.findViewById<ImageView>(R.id.more_settings)
+//        settings.setOnClickListener {
+//            startActivity(Intent(requireActivity(),Settings::class.java))
+//        }
+
 
 
         // Logout button

@@ -18,6 +18,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.pulseplay.R
 import com.example.pulseplay.Register
+import com.example.pulseplay.dashboard.AvgBloodPressure
+import com.example.pulseplay.dashboard.AvgBodyTemperature
+import com.example.pulseplay.dashboard.AvgCaloriesConsumed
+import com.example.pulseplay.dashboard.AvgFatPercentage
+import com.example.pulseplay.dashboard.AvgOxygenSat
+import com.example.pulseplay.dashboard.AvgRespiratoryRate
+import com.example.pulseplay.dashboard.AvgWalkingHR
 import com.example.pulseplay.dashboard.BodyMassIndex
 import com.example.pulseplay.dashboard.HeartRate
 import com.example.pulseplay.dashboard.TotalSteps
@@ -67,6 +74,41 @@ class HomeFragment : Fragment() {
         val heartrate = view.findViewById<LinearLayout>(R.id.heart_rate)
         heartrate.setOnClickListener {
             val intent = Intent(requireContext(), HeartRate::class.java)
+            startActivity(intent)
+        }
+        val walkingheartrate = view.findViewById<LinearLayout>(R.id.avg_walking_hr)
+        walkingheartrate.setOnClickListener {
+            val intent = Intent(requireContext(), AvgWalkingHR::class.java)
+            startActivity(intent)
+        }
+        val avgbloodpressure = view.findViewById<LinearLayout>(R.id.avg_blood_pressure)
+        avgbloodpressure.setOnClickListener {
+            val intent = Intent(requireContext(), AvgBloodPressure::class.java)
+            startActivity(intent)
+        }
+        val avgbodytemp = view.findViewById<LinearLayout>(R.id.avg_body_temp)
+        avgbodytemp.setOnClickListener {
+            val intent = Intent(requireContext(), AvgBodyTemperature::class.java)
+            startActivity(intent)
+        }
+        val avgresrate = view.findViewById<LinearLayout>(R.id.avg_res_rate)
+        avgresrate.setOnClickListener {
+            val intent = Intent(requireContext(), AvgRespiratoryRate::class.java)
+            startActivity(intent)
+        }
+        val avgoxygensat = view.findViewById<LinearLayout>(R.id.avg_oxygen_sat)
+        avgoxygensat.setOnClickListener {
+            val intent = Intent(requireContext(), AvgOxygenSat::class.java)
+            startActivity(intent)
+        }
+        val avgfatperc = view.findViewById<LinearLayout>(R.id.avg_fat_per)
+        avgfatperc.setOnClickListener {
+            val intent = Intent(requireContext(), AvgFatPercentage::class.java)
+            startActivity(intent)
+        }
+        val avgcalcon = view.findViewById<LinearLayout>(R.id.avg_cal_consumed)
+        avgcalcon.setOnClickListener {
+            val intent = Intent(requireContext(), AvgCaloriesConsumed::class.java)
             startActivity(intent)
         }
         setupNotificationBadge()
