@@ -132,6 +132,12 @@ class HomeFragment : Fragment() {
                 // Show loading state if needed
                 UserRepository.fetchUserData()
                 UserRepository.fetchPredictions()
+
+                // Check predictions and create notifications if needed
+                UserRepository.getUser()?.username?.let { username ->
+                    UserRepository.checkAndCreateNotifications(username)
+                }
+
                 updateUI()
             } catch (e: Exception) {
                 // Handle error (show toast or error message)
@@ -164,14 +170,48 @@ class HomeFragment : Fragment() {
         healthData?.let { data ->
             // Find latest entries for current date
             val latestSteps = data.stepCount.lastOrNull { it.date == currentDate }
-            val latestEnergy = data.activeEnergyBurned.lastOrNull { it.date == currentDate }
             val latestHeartRate = data.heartRate.lastOrNull { it.date == currentDate }
+            val latestWalkingHeartRate = data.walkingHeartRateAverage.lastOrNull { it.date == currentDate }
+            val latestBloodPressureSystolic = data.bloodPressureSystolic.lastOrNull { it.date == currentDate }
+            val latestBloodPressureDiastolic = data.bloodPressureDiastolic.lastOrNull { it.date == currentDate }
+            val latestBodyTemp = data.bodyTemperature.lastOrNull { it.date == currentDate }
+            val latestRespiratoryRate = data.respiratoryRate.lastOrNull { it.date == currentDate }
+            val latestOxygenSaturation = data.oxygenSaturation.lastOrNull { it.date == currentDate }
+            val latestFatPercentage = data.bodyFatPercentage.lastOrNull { it.date == currentDate }
+            val latestDietaryEnergy = data.dietaryEnergyConsumed.lastOrNull { it.date == currentDate }
 
-            binding.totalStepsValue.text = latestSteps?.value.toString() + " /steps"
+            // Update UI with latest values
+            binding.totalStepsValue.text = latestSteps?.value?.toInt().toString() + " /steps"
+            binding.heartRateValue.text = latestHeartRate?.value?.toInt().toString() + " bpm"
+            binding.walkingHeartRateValue.text = latestWalkingHeartRate?.value?.toInt().toString() + " bpm"
+
+            // Combine systolic and diastolic blood pressure if both exist
+            val bloodPressureText = if (latestBloodPressureSystolic != null && latestBloodPressureDiastolic != null) {
+                "${latestBloodPressureSystolic.value.toInt()}/${latestBloodPressureDiastolic.value.toInt()}"
+            } else if (latestBloodPressureSystolic != null) {
+                "${latestBloodPressureSystolic.value.toInt()}/--"
+            } else if (latestBloodPressureDiastolic != null) {
+                "--/${latestBloodPressureDiastolic.value.toInt()}"
+            } else {
+                "--/--"
+            }
+            binding.bloodPressureValue.text = "$bloodPressureText mmHg"
+
+            binding.bodyTempValue.text = latestBodyTemp?.value?.toString()?.take(4) + " °C" // Limit to 1 decimal place
+            binding.respiratoryRateValue.text = latestRespiratoryRate?.value?.toInt().toString() + " bpm"
+            binding.oxygenSaturationValue.text = (latestOxygenSaturation?.value?.times(100))?.toInt().toString() + " %"
+            binding.fatPercentageValue.text = latestFatPercentage?.value?.toInt().toString() + " %"
+            binding.dietartyEnergyValue.text = latestDietaryEnergy?.value?.toInt().toString() + " kcal"
 
             println("Latest Steps: $latestSteps")
-            println("Latest Energy: $latestEnergy")
             println("Latest Heart Rate: $latestHeartRate")
+            println("Latest Walking Heart Rate: $latestWalkingHeartRate")
+            println("Latest Blood Pressure: $latestBloodPressureSystolic/$latestBloodPressureDiastolic")
+            println("Latest Body Temp: $latestBodyTemp")
+            println("Latest Respiratory Rate: $latestRespiratoryRate")
+            println("Latest Oxygen Saturation: $latestOxygenSaturation")
+            println("Latest Fat Percentage: $latestFatPercentage")
+            println("Latest Dietary Energy: $latestDietaryEnergy")
         }
 
         // Update prediction circles

@@ -1,78 +1,133 @@
 package com.example.pulseplay.dashboard
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.pulseplay.R
+import com.example.pulseplay.repository.UserRepository
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HeartRate : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heart_rate)
 
-        setupHeartRateChart()
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        setupHeartRateChartWithData()
     }
 
-    private fun setupHeartRateChart() {
-        val heartRateChart = findViewById<com.github.mikephil.charting.charts.LineChart>(R.id.heartRateChart)
+    private fun setupHeartRateChartWithData() {
+        val heartRateChart = findViewById<LineChart>(R.id.heartRateChart)
 
-        // Sample data (replace with real-time data)
-        val entries = listOf(
-            Entry(0f, 72f),  // Time (e.g., 10:00 AM)
-            Entry(1f, 85f),   // Time (e.g., 11:00 AM)
-            Entry(2f, 78f),
-            Entry(3f, 90f),
-            Entry(4f, 88f)
-        )
+        // Get all health data from repository
+        val healthData = UserRepository.getHealthData()
+        val heartRateDataList = healthData?.heartRate
 
-        // Configure dataset
-        val dataSet = LineDataSet(entries, "Heart Rate (BPM)")
-        dataSet.color = Color.RED
-        dataSet.valueTextColor = Color.WHITE
-        dataSet.lineWidth = 2f
-        dataSet.setCircleColor(Color.RED)
-        dataSet.circleRadius = 4f
+        // Sort data by date (oldest first)
+        val sortedData = heartRateDataList?.sortedBy { it.date }
 
-        // Configure X-axis (time labels)
-        val xAxis = heartRateChart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.granularity = 1f
-        xAxis.valueFormatter = object : ValueFormatter() {
-            override fun getFormattedValue(value: Float): String {
-                return when (value.toInt()) {
-                    0 -> "10:00"
-                    1 -> "11:00"
-                    2 -> "12:00"
-                    3 -> "13:00"
-                    4 -> "14:00"
-                    else -> ""
-                }
+        // Prepare entries and labels
+        val entries = mutableListOf<Entry>()
+        val dateLabels = mutableListOf<String>()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val displayFormat = SimpleDateFormat("MMM dd", Locale.getDefault()) // Format for display
+
+        sortedData?.forEachIndexed { index, hrData ->
+            try {
+                entries.add(Entry(index.toFloat(), hrData.value.toFloat()))
+
+                // Format date for display
+                val date = dateFormat.parse(hrData.date)
+                dateLabels.add(displayFormat.format(date))
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
 
-        // Configure Y-axis
-        val leftAxis = heartRateChart.axisLeft
-        leftAxis.axisMinimum = 60f
-        leftAxis.axisMaximum = 120f
-        leftAxis.granularity = 10f
-        leftAxis.textColor = Color.WHITE
+        // If we have more than 14 data points, show every nth label to avoid crowding
+        val labelInterval = when {
+            sortedData?.size!! > 30 -> 7  // Weekly labels if more than a month
+            sortedData?.size!! > 14 -> 3  // Every 3 days if 2-4 weeks
+            else -> 1                      // Every day if less than 2 weeks
+        }
 
-        // Disable right Y-axis
-        heartRateChart.axisRight.isEnabled = false
+        val finalLabels = dateLabels.mapIndexed { index, label ->
+            if (index % labelInterval == 0 || index == dateLabels.size - 1) label else ""
+        }
 
-        // Chart styling
-        heartRateChart.description.isEnabled = false
-        heartRateChart.legend.isEnabled = false
-        heartRateChart.setTouchEnabled(true)
-        heartRateChart.setPinchZoom(true)
+        val dataSet = LineDataSet(entries, "Heart Rate (BPM)").apply {
+            color = Color.RED
+            valueTextColor = Color.BLACK
+            lineWidth = 2f
+            setCircleColor(Color.RED)
+            circleRadius = 4f
+            setDrawCircleHole(false)
+            setDrawValues(false) // Hide values on points to reduce clutter
+            mode = LineDataSet.Mode.CUBIC_BEZIER // Smooth line
+            fillAlpha = 50
+            setDrawFilled(true)
+            fillColor = Color.RED
+        }
 
-        // Set data and refresh
-        heartRateChart.data = LineData(dataSet)
-        heartRateChart.invalidate()
+        heartRateChart.apply {
+            data = LineData(dataSet)
+            setBackgroundColor(Color.WHITE)
+            description.isEnabled = false
+            legend.isEnabled = true
+            animateXY(1000, 1000)
+
+            xAxis.apply {
+                position = XAxis.XAxisPosition.BOTTOM
+                granularity = 1f
+                setDrawGridLines(false)
+                valueFormatter = IndexAxisValueFormatter(finalLabels)
+                labelCount = finalLabels.size
+                textColor = Color.BLACK
+                textSize = 10f
+
+                // Rotate labels if many data points
+                if (sortedData.size > 14) {
+                    labelRotationAngle = -45f
+                }
+            }
+
+            axisLeft.apply {
+                axisMinimum = 40f // Minimum reasonable heart rate
+                axisMaximum = 160f // Maximum reasonable heart rate
+                granularity = 20f
+                textColor = Color.BLACK
+                setDrawGridLines(true)
+            }
+            axisRight.isEnabled = false
+
+            // Enable interactivity
+            setTouchEnabled(true)
+            setPinchZoom(true)
+            setScaleEnabled(true)
+            setDragEnabled(true)
+            setVisibleXRangeMaximum(14f) // Show about 2 weeks of data at once
+
+            // Move to the end of the data (most recent readings)
+            if (entries.isNotEmpty()) {
+                moveViewToX(entries.last().x)
+            }
+
+            notifyDataSetChanged()
+            invalidate()
+        }
     }
 }

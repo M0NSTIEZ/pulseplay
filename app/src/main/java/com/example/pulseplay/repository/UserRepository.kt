@@ -4,17 +4,24 @@ import android.content.Intent
 import android.util.Log
 import com.example.pulseplay.MainActivity
 import com.example.pulseplay.PulsePlayApplication
+import com.example.pulseplay.api.NotificationApiService
 import com.example.pulseplay.api.PredictionApiService
 import com.example.pulseplay.api.UserApiService
 import com.example.pulseplay.auth.TokenManager
 import com.example.pulseplay.models.HealthData
 import com.example.pulseplay.models.HealthDataEntry
+import com.example.pulseplay.models.Notification
 import com.example.pulseplay.models.PredictionRequest
 import com.example.pulseplay.models.User
 import com.example.pulseplay.models.UserDetails
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 object UserRepository {
+    private val notificationApiService = NotificationApiService.create()
+
     private var user: User? = null
     private var userDetails: UserDetails? = null
     private var healthData: HealthData? = null
@@ -33,6 +40,88 @@ object UserRepository {
 
     fun setHealthData(newHealthData: HealthData) {
         healthData = newHealthData
+    }
+
+    suspend fun saveNotification(notification: Notification): Notification? {
+        return try {
+            val response = notificationApiService.saveNotification(notification)
+            if (response.isSuccessful) {
+                println("Save notification SUCCESS Response: $response")
+                response.body()
+            } else {
+                println("Error saving notification")
+                null
+            }
+        } catch (e: Exception) {
+            println("Error saving notification: ${e.message}")
+            null
+        }
+    }
+
+    suspend fun getNotificationsForUser(username: String): List<Notification> {
+        return try {
+            val response = notificationApiService.getNotificationsByUser(username)
+            if (response.isSuccessful) {
+                println("Get notification for $username SUCCESS Response: $response")
+                response.body() ?: emptyList()
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            println("Save notification ERROR Response: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun markNotificationAsRead(notificationId: String): Boolean {
+        return try {
+            val response = notificationApiService.markNotificationAsRead(notificationId)
+            response.isSuccessful && response.body() != null
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    // Add this method to check predictions and create notifications
+    suspend fun checkAndCreateNotifications(username: String) {
+        val dehydrationRisk = getDehydrationPrediction()
+        val heatStrokeRisk = getHeatStrokePrediction()
+        val stressRisk = getStressPrediction()
+
+        val currentTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+
+        if (dehydrationRisk != null && dehydrationRisk > 0.5) {
+            saveNotification(
+                Notification(
+                    username = username,
+                    title = "Dehydration Risk",
+                    message = "Your dehydration risk is high (${(dehydrationRisk * 100).toInt()}%). Remember to drink water!",
+                    type = "HEALTH_ALERT"
+                )
+            )
+        }
+
+        if (heatStrokeRisk != null && heatStrokeRisk > 0.5) {
+            saveNotification(
+                Notification(
+                    username = username,
+                    title = "Heat Stroke Risk",
+                    message = "Your heat stroke risk is high (${(heatStrokeRisk * 100).toInt()}%). Find a cooler environment!",
+                    type = "HEALTH_ALERT"
+                )
+            )
+        }
+
+        if (stressRisk != null && stressRisk > 0.5) {
+            saveNotification(
+                Notification(
+                    username = username,
+                    title = "Fatigue Risk",
+                    message = "Your fatigue risk is high (${(stressRisk * 100).toInt()}%). Consider resting!",
+                    type = "HEALTH_ALERT"
+                )
+            )
+        }
     }
 
     suspend fun fetchUserData() {

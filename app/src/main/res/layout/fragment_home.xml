@@ -284,6 +284,7 @@
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
+                    android:id="@+id/heartRateValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -311,6 +312,7 @@
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
+                    android:id="@+id/walkingHeartRateValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -337,6 +339,7 @@
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
+                    android:id="@+id/bloodPressureValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -363,6 +366,7 @@
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
+                    android:id="@+id/bodyTempValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -389,6 +393,7 @@
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
+                    android:id="@+id/respiratoryRateValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -415,6 +420,7 @@
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
+                    android:id="@+id/oxygenSaturationValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -443,6 +449,7 @@
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
+                    android:id="@+id/fatPercentageValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -469,6 +476,7 @@
                     android:layout_marginEnd="81dp"/>
 
                 <TextView
+                    android:id="@+id/dietartyEnergyValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
