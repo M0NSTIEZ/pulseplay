@@ -20,6 +20,7 @@ import com.example.pulseplay.profile.ContactUsActivity
 import com.example.pulseplay.profile.EditProfile
 import com.example.pulseplay.profile.PrivacyPolicyActivity
 import com.example.pulseplay.repository.UserRepository
+import com.example.pulseplay.settings.ChangePasswordActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
@@ -57,10 +58,10 @@ class ProfileFragment : Fragment() {
        privacy.setOnClickListener {
             startActivity(Intent(requireActivity(),PrivacyPolicyActivity::class.java))
         }
-//        val settings = view.findViewById<ImageView>(R.id.more_settings)
-//        settings.setOnClickListener {
-//            startActivity(Intent(requireActivity(),Settings::class.java))
-//        }
+        val settings = view.findViewById<ImageView>(R.id.more_settings)
+        settings.setOnClickListener {
+            startActivity(Intent(requireActivity(), ChangePasswordActivity::class.java))
+        }
 
 
 

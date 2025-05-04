@@ -6,6 +6,8 @@
     <string name="title_camera">Camera</string>
     <string name="title_profile">Profile</string>
     <string name="privacy_policy_content">
+    <string name="password_requirements">Password must be at least 6 characters long</string>
+    <string name="back_button">Back button</string>
     <![CDATA[
     <b>Last Updated:</b> [Insert Date]\n\n
     <b>1. Introduction</b>\n
@@ -44,6 +46,7 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+
 
     <string-array name="cardiovascular_options">
         <item>No</item>
