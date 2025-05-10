@@ -72,11 +72,12 @@ class TotalSteps : AppCompatActivity() {
         }
 
         val dataSet = BarDataSet(entries, "Steps").apply {
-            colors = ColorTemplate.MATERIAL_COLORS.toList()
+            color = Color.BLUE  // Use your preferred color here
             valueTextColor = Color.BLACK
             valueTextSize = 12f
             setDrawValues(false) // Hide values on bars to reduce clutter
         }
+
 
         barChart.apply {
             data = BarData(dataSet).apply {
@@ -125,9 +126,10 @@ class TotalSteps : AppCompatActivity() {
             // Configure the appearance
             setDrawGridBackground(false)
             setDrawBorders(false)
-            setDrawMarkers(true)
+            setDrawMarkers(false)
 
             notifyDataSetChanged()
+            invalidate()
             invalidate()
         }
     }

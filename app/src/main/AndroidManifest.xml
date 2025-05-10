@@ -121,6 +121,9 @@
             android:name=".Register"
             android:exported="false" />
         <activity
+            android:name=".profile.ContactUsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">

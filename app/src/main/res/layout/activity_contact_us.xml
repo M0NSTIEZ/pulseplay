@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/main"  android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@color/white"
@@ -23,8 +23,8 @@
             android:gravity="center"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Hazel Climaco -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/hazelcard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -58,18 +58,18 @@
                         android:src="@drawable/gprogrammer" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_hazel_email" android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="hclimaco98@gmail.com"
                         android:textSize="16sp"
                         android:textColor="@color/black"
-                        android:layout_marginStart="8dp"/>
-                </LinearLayout>
+                        android:layout_marginStart="8dp"
+                        android:autoLink="email" /> </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Jefferson Paul Valencia -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/jeffcard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -103,18 +103,18 @@
                         android:src="@drawable/mprogrammer" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_jefferson_email" android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="jpaulcv1@gmail.com"
                         android:textSize="16sp"
                         android:textColor="@color/black"
-                        android:layout_marginStart="8dp"/>
-                </LinearLayout>
+                        android:layout_marginStart="8dp"
+                        android:autoLink="email" /> </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Butch Nino Butas -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/butchcard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -148,13 +148,13 @@
                         android:src="@drawable/m1programmer" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_butch_email" android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="butchbutas1112@gmail.com"
                         android:textSize="16sp"
                         android:textColor="@color/black"
-                        android:layout_marginStart="8dp"/>
-                </LinearLayout>
+                        android:layout_marginStart="8dp"
+                        android:autoLink="email" /> </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

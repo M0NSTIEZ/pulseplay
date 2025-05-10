@@ -14,6 +14,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginEnd
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.pulseplay.R
@@ -89,26 +90,6 @@ class HomeFragment : Fragment() {
         val avgbodytemp = view.findViewById<LinearLayout>(R.id.avg_body_temp)
         avgbodytemp.setOnClickListener {
             val intent = Intent(requireContext(), AvgBodyTemperature::class.java)
-            startActivity(intent)
-        }
-        val avgresrate = view.findViewById<LinearLayout>(R.id.avg_res_rate)
-        avgresrate.setOnClickListener {
-            val intent = Intent(requireContext(), AvgRespiratoryRate::class.java)
-            startActivity(intent)
-        }
-        val avgoxygensat = view.findViewById<LinearLayout>(R.id.avg_oxygen_sat)
-        avgoxygensat.setOnClickListener {
-            val intent = Intent(requireContext(), AvgOxygenSat::class.java)
-            startActivity(intent)
-        }
-        val avgfatperc = view.findViewById<LinearLayout>(R.id.avg_fat_per)
-        avgfatperc.setOnClickListener {
-            val intent = Intent(requireContext(), AvgFatPercentage::class.java)
-            startActivity(intent)
-        }
-        val avgcalcon = view.findViewById<LinearLayout>(R.id.avg_cal_consumed)
-        avgcalcon.setOnClickListener {
-            val intent = Intent(requireContext(), AvgCaloriesConsumed::class.java)
             startActivity(intent)
         }
         setupNotificationBadge()
@@ -198,10 +179,6 @@ class HomeFragment : Fragment() {
             binding.bloodPressureValue.text = "$bloodPressureText mmHg"
 
             binding.bodyTempValue.text = latestBodyTemp?.value?.toString()?.take(4) + " °C" // Limit to 1 decimal place
-            binding.respiratoryRateValue.text = latestRespiratoryRate?.value?.toInt().toString() + " bpm"
-            binding.oxygenSaturationValue.text = (latestOxygenSaturation?.value?.times(100))?.toInt().toString() + " %"
-            binding.fatPercentageValue.text = latestFatPercentage?.value?.toInt().toString() + " %"
-            binding.dietartyEnergyValue.text = latestDietaryEnergy?.value?.toInt().toString() + " kcal"
 
             println("Latest Steps: $latestSteps")
             println("Latest Heart Rate: $latestHeartRate")
@@ -249,19 +226,18 @@ class HomeFragment : Fragment() {
     private fun updateNotificationBadge(count: Int) {
         // Remove existing badge if any
         badge?.let {
-            (binding.notificationIcon.parent as? ViewGroup)?.removeView(it)
+            (badge?.parent as? ViewGroup)?.removeView(it)
         }
 
         if (count > 0) {
             badge = TextView(requireContext()).apply {
-                id = R.id.notificationBadge
+                id = R.id.notificationIcon
                 text = if (count > 9) "9+" else count.toString()
                 setTextColor(Color.WHITE)
-                textSize = 12f
+                textSize = 8f
+                setTextColor(Color.WHITE)
                 setBackgroundResource(R.drawable.badge_background)
-                // Add padding for better appearance
                 setPadding(8.dpToPx(), 4.dpToPx(), 8.dpToPx(), 4.dpToPx())
-                // Ensure text is centered
                 gravity = Gravity.CENTER
             }
 
@@ -269,17 +245,16 @@ class HomeFragment : Fragment() {
                 FrameLayout.LayoutParams.WRAP_CONTENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT
             ).apply {
-                // Position badge on top-right of icon
                 gravity = Gravity.END or Gravity.TOP
-                // Adjust these values to fine-tune position:
-                topMargin = (-5).dpToPx()  // Negative to overlap icon
-                marginEnd = (-5).dpToPx()  // Negative to overlap icon
+                topMargin = 14.dpToPx()
+                marginEnd = 14.dpToPx()
             }
 
-            // Add badge to the notification icon's parent
-            (binding.notificationIcon.parent as? ViewGroup)?.addView(badge, params)
+            // Attach to the top-level layout (assuming it's a FrameLayout)
+            (binding.root as? ViewGroup)?.addView(badge, params)
         }
     }
+
 
     // Extension to convert dp to pixels
     private fun Int.dpToPx(): Int = (this * resources.displayMetrics.density).toInt()
