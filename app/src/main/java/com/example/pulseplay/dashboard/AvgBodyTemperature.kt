@@ -72,7 +72,7 @@ class AvgBodyTemperature : AppCompatActivity() {
         }
 
         val dataSet = BarDataSet(entries, "Body Temperature (°C)").apply {
-            colors = ColorTemplate.MATERIAL_COLORS.toList()
+            colors = listOf(Color.YELLOW)
             valueTextColor = Color.BLACK
             valueTextSize = 12f
             setDrawValues(true) // Show values on bars

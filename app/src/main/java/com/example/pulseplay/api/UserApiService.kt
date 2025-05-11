@@ -3,8 +3,11 @@ package com.example.pulseplay.api
 import com.example.pulseplay.models.HealthData
 import com.example.pulseplay.models.LoginRequest
 import com.example.pulseplay.models.LoginResponse
+import com.example.pulseplay.models.PasswordChangeRequest
+import com.example.pulseplay.models.PasswordChangeResponse
 import com.example.pulseplay.models.User
 import com.example.pulseplay.models.UserDetails
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,6 +36,13 @@ interface UserApiService {
     suspend fun getHealthData(
         @Query("username") username: String
     ): Response<HealthData>
+
+    // New password change endpoint
+    @POST("api/change-password")
+    fun changePassword(
+        @Header("Authorization") token: String,
+        @Body request: PasswordChangeRequest
+    ): Call<PasswordChangeResponse>
 
     companion object {
         private const val BASE_URL = "https://health-api-a1jm.onrender.com/"

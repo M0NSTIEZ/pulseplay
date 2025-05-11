@@ -1,138 +1,133 @@
+// settings/ChangePasswordActivity.kt
 package com.example.pulseplay.settings
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pulseplay.R
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.example.pulseplay.api.UserApiService
+import com.example.pulseplay.auth.TokenManager
+import com.example.pulseplay.databinding.ActivityChangePasswordBinding
+import com.example.pulseplay.models.PasswordChangeRequest
+import com.example.pulseplay.models.PasswordChangeResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ChangePasswordActivity : AppCompatActivity() {
 
-    private lateinit var currentPasswordEditText: TextInputEditText
-    private lateinit var newPasswordEditText: TextInputEditText
-    private lateinit var confirmPasswordEditText: TextInputEditText
-    private lateinit var currentPasswordLayout: TextInputLayout
-    private lateinit var newPasswordLayout: TextInputLayout
-    private lateinit var confirmPasswordLayout: TextInputLayout
-    private lateinit var updateButton: Button
-    private lateinit var auth: FirebaseAuth
-    private lateinit var user: FirebaseUser
+    private lateinit var binding: ActivityChangePasswordBinding
+    private lateinit var apiService: UserApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_password)
+        binding = ActivityChangePasswordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance()
-        user = auth.currentUser ?: run {
-            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
-            finish()
-            return
-        }
+        apiService = UserApiService.create()
+        setupViews()
+    }
 
-        // Initialize views
-        currentPasswordEditText = findViewById(R.id.currentPassword)
-        newPasswordEditText = findViewById(R.id.newPassword)
-        confirmPasswordEditText = findViewById(R.id.confirmPassword)
-        currentPasswordLayout = findViewById(R.id.currentPasswordLayout)
-        newPasswordLayout = findViewById(R.id.newPasswordLayout)
-        confirmPasswordLayout = findViewById(R.id.confirmPasswordLayout)
-        updateButton = findViewById(R.id.updateButton)
+    private fun setupViews() {
+        binding.backButton.setOnClickListener { finish() }
 
-        // Set up back button
-        findViewById<ImageView>(R.id.backButton).setOnClickListener {
-            finish()
-        }
+        binding.updateButton.setOnClickListener {
+            val currentPass = binding.currentPassword.text.toString()
+            val newPass = binding.newPassword.text.toString()
+            val confirmPass = binding.confirmPassword.text.toString()
 
-        updateButton.setOnClickListener {
-            changePassword()
+            if (validateInputs(currentPass, newPass, confirmPass)) {
+                changePassword(currentPass, newPass)
+            }
         }
     }
 
-    private fun changePassword() {
-        val currentPassword = currentPasswordEditText.text.toString().trim()
-        val newPassword = newPasswordEditText.text.toString().trim()
-        val confirmPassword = confirmPasswordEditText.text.toString().trim()
+    private fun validateInputs(
+        currentPass: String,
+        newPass: String,
+        confirmPass: String
+    ): Boolean {
+        binding.apply {
+            currentPasswordLayout.error = null
+            newPasswordLayout.error = null
+            confirmPasswordLayout.error = null
 
-        // Reset errors
-        currentPasswordLayout.error = null
-        newPasswordLayout.error = null
-        confirmPasswordLayout.error = null
+            if (currentPass.isEmpty()) {
+                currentPasswordLayout.error = "Current password required"
+                return false
+            }
 
-        // Validate inputs
-        if (currentPassword.isEmpty()) {
-            currentPasswordLayout.error = "Current password is required"
+            if (newPass.isEmpty()) {
+                newPasswordLayout.error = "New password required"
+                return false
+            }
+
+            if (newPass.length < 6) {
+                newPasswordLayout.error = "Minimum 6 characters required"
+                return false
+            }
+
+            if (confirmPass != newPass) {
+                confirmPasswordLayout.error = "Passwords don't match"
+                return false
+            }
+
+            return true
+        }
+    }
+
+    private fun changePassword(currentPass: String, newPass: String) {
+        val token = TokenManager.getToken()
+        if (token.isNullOrEmpty()) {
+            Toast.makeText(this, "Session expired. Please login again.", Toast.LENGTH_SHORT).show()
+            finish()
             return
         }
 
-        if (newPassword.isEmpty()) {
-            newPasswordLayout.error = "New password is required"
-            return
-        }
+        showLoading(true)
 
-        if (newPassword.length < 6) {
-            newPasswordLayout.error = "Password must be at least 6 characters"
-            return
-        }
+        val request = PasswordChangeRequest(currentPass, newPass)
 
-        if (confirmPassword.isEmpty()) {
-            confirmPasswordLayout.error = "Please confirm your new password"
-            return
-        }
+        apiService.changePassword("Bearer $token", request).enqueue(object : Callback<PasswordChangeResponse> {
+            override fun onResponse(
+                call: Call<PasswordChangeResponse>,
+                response: Response<PasswordChangeResponse>
+            ) {
+                showLoading(false)
+                handleResponse(response)
+            }
 
-        if (newPassword != confirmPassword) {
-            confirmPasswordLayout.error = "Passwords don't match"
-            return
-        }
+            override fun onFailure(call: Call<PasswordChangeResponse>, t: Throwable) {
+                showLoading(false)
+                Toast.makeText(
+                    this@ChangePasswordActivity,
+                    "Network error: ${t.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
+    }
 
-        // Show progress
-        updateButton.isEnabled = false
-        findViewById<ProgressBar>(R.id.progressBar).visibility = View.VISIBLE
-
-        // Re-authenticate user
-        val credential = EmailAuthProvider.getCredential(user.email!!, currentPassword)
-        user.reauthenticate(credential)
-            .addOnCompleteListener { reAuthTask ->
-                if (reAuthTask.isSuccessful) {
-                    // Update password
-                    user.updatePassword(newPassword)
-                        .addOnCompleteListener { updateTask ->
-                            findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
-                            updateButton.isEnabled = true
-
-                            if (updateTask.isSuccessful) {
-                                Toast.makeText(
-                                    this,
-                                    "Password updated successfully",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                finish()
-                            } else {
-                                Toast.makeText(
-                                    this,
-                                    "Failed to update password: ${updateTask.exception?.message}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
+    private fun handleResponse(response: Response<PasswordChangeResponse>) {
+        if (response.isSuccessful) {
+            response.body()?.let {
+                if (it.success) {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    finish()
                 } else {
-                    findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
-                    updateButton.isEnabled = true
-                    currentPasswordLayout.error = "Incorrect current password"
-                    Toast.makeText(
-                        this,
-                        "Authentication failed: ${reAuthTask.exception?.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
+        } else {
+            when (response.code()) {
+                401 -> Toast.makeText(this, "Invalid current password", Toast.LENGTH_SHORT).show()
+                else -> Toast.makeText(this, "Error: ${response.message()}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun showLoading(show: Boolean) {
+        binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
+        binding.updateButton.isEnabled = !show
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -11,23 +11,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Average Body Temperature"
+        android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"/>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/body_temp_bar_chart"
-        android:layout_width="0dp"
+        android:layout_below="@+id/body_temperature"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/body_temperature"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginEnd="16dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_below="@+id/body_temp_bar_chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_margin="20dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🌡️ Avg. Body Temp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Normal body temperature ranges:\n\n• Oral: 97.6°F-99.6°F (36.4°C-37.6°C)\n• Rectal/Ear: 98.6°F-100.6°F (37°C-38.1°C)\n• Armpit: 95.8°F-98.6°F (35.4°C-37°C)\n\nTemperature variations occur due to:\n• Time of day (lower in AM, higher in PM)\n• Activity level\n• Menstrual cycle\n• Age (older adults tend lower)\n• Environment\n\nFever threshold: &gt;100.4°F (38°C) orally."
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

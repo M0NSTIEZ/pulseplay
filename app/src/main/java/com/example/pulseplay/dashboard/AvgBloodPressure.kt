@@ -40,7 +40,7 @@ class AvgBloodPressure : AppCompatActivity() {
         val systolicData = healthData?.bloodPressureSystolic
         val diastolicData = healthData?.bloodPressureDiastolic
 
-        // Create a map of dates to systolic values for easier lookup
+        // Create a map of dates to values for easier lookup
         val systolicMap = systolicData?.associateBy { it.date }
         val diastolicMap = diastolicData?.associateBy { it.date }
 
@@ -50,8 +50,7 @@ class AvgBloodPressure : AppCompatActivity() {
         val uniqueDates = allDates.distinct().sorted()
 
         // Prepare entries and labels
-        val systolicEntries = mutableListOf<BarEntry>()
-        val diastolicEntries = mutableListOf<BarEntry>()
+        val entries = mutableListOf<BarEntry>()
         val dateLabels = mutableListOf<String>()
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val displayFormat = SimpleDateFormat("MMM dd", Locale.getDefault())
@@ -63,9 +62,8 @@ class AvgBloodPressure : AppCompatActivity() {
 
                 // Only add entries if we have both values
                 if (systolicValue > 0 && diastolicValue > 0) {
-                    // Create stacked bar entries (systolic on top of diastolic)
-                    systolicEntries.add(BarEntry(index.toFloat(), floatArrayOf(diastolicValue, systolicValue)))
-                    diastolicEntries.add(BarEntry(index.toFloat(), floatArrayOf(diastolicValue)))
+                    // Create stacked bar entry (diastolic at bottom, systolic on top)
+                    entries.add(BarEntry(index.toFloat(), floatArrayOf(diastolicValue, systolicValue - diastolicValue)))
 
                     // Format date for display
                     val parsedDate = dateFormat.parse(date)
@@ -76,28 +74,31 @@ class AvgBloodPressure : AppCompatActivity() {
             }
         }
 
-        // Adjust label density based on data size
+        // Adjust label density
         val labelInterval = when {
-            dateLabels.size > 30 -> 7  // Weekly labels
-            dateLabels.size > 14 -> 3   // Every 3 days
-            else -> 1                   // Daily
+            dateLabels.size > 30 -> 7
+            dateLabels.size > 14 -> 3
+            else -> 1
         }
 
         val finalLabels = dateLabels.mapIndexed { index, label ->
             if (index % labelInterval == 0 || index == dateLabels.size - 1) label else ""
         }
 
-        // Create datasets
-        val systolicDataSet = BarDataSet(systolicEntries, "Systolic").apply {
-            colors = listOf(Color.TRANSPARENT, Color.RED) // Top part (systolic)
+        // Create single dataset with stacked values
+        val dataSet = BarDataSet(entries, "Blood Pressure").apply {
+            // Colors for the stacks (diastolic first, then systolic)
+            colors = listOf(Color.BLUE, Color.RED)
+            stackLabels = arrayOf("Diastolic", "Systolic")
             setDrawValues(true)
             valueTextColor = Color.BLACK
             valueTextSize = 10f
             valueFormatter = object : ValueFormatter() {
-                override fun getBarLabel(barEntry: BarEntry?): String {
-                    // Display systolic value (second value in the stack)
-                    return if (barEntry?.yVals?.size ?: 0 > 1) {
-                        "${barEntry?.yVals?.get(1)?.toInt()}"
+                override fun getBarStackedLabel(value: Float, entry: BarEntry?): String {
+                    // Show both values when stacked
+                    val values = entry?.yVals
+                    return if (values != null && values.size >= 2) {
+                        "${values[0].toInt()}/${(values[0] + values[1]).toInt()}"
                     } else {
                         ""
                     }
@@ -105,21 +106,8 @@ class AvgBloodPressure : AppCompatActivity() {
             }
         }
 
-        val diastolicDataSet = BarDataSet(diastolicEntries, "Diastolic").apply {
-            color = Color.BLUE // Bottom part (diastolic)
-            setDrawValues(true)
-            valueTextColor = Color.BLACK
-            valueTextSize = 10f
-            valueFormatter = object : ValueFormatter() {
-                override fun getBarLabel(barEntry: BarEntry?): String {
-                    // Display diastolic value
-                    return "${barEntry?.y?.toInt()}"
-                }
-            }
-        }
-
         bpChart.apply {
-            data = BarData(systolicDataSet, diastolicDataSet).apply {
+            data = BarData(dataSet).apply {
                 barWidth = 0.4f
                 setValueTextColor(Color.BLACK)
             }
@@ -143,8 +131,8 @@ class AvgBloodPressure : AppCompatActivity() {
             }
 
             axisLeft.apply {
-                axisMinimum = 60f // Reasonable min for BP
-                axisMaximum = 180f // Reasonable max for BP
+                axisMinimum = 60f
+                axisMaximum = 180f
                 granularity = 20f
                 textColor = Color.BLACK
                 setDrawGridLines(true)
@@ -157,11 +145,10 @@ class AvgBloodPressure : AppCompatActivity() {
             setDragEnabled(true)
             setVisibleXRangeMaximum(14f)
 
-            if (systolicEntries.isNotEmpty()) {
-                moveViewToX(systolicEntries.last().x)
+            if (entries.isNotEmpty()) {
+                moveViewToX(entries.last().x)
             }
 
-            // Add space between bars
             setDrawBarShadow(false)
             setDrawValueAboveBar(true)
 

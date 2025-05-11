@@ -33,37 +33,45 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        // 🔓 Get the logged-in user and display name
-        val user = FirebaseAuth.getInstance().currentUser
-        val name = user?.displayName ?: "User"
+        // Get user from repository instead of Firebase directly
+        val user = UserRepository.getUser()
+        val name = user?.fullName ?: "User" // Use same fallback as HomeFragment
 
-        // 📝 Set name to the profile_name TextView
+        // Set name to the profile_name TextView
         val nameTextView = view.findViewById<TextView>(R.id.profile_name)
         nameTextView.text = name
 
-        // Profile Edit (More) button
+        // Also set user details (height, weight, age)
+        val userDetails = UserRepository.getUserDetails()
+        view.findViewById<TextView>(R.id.user_height).text = userDetails?.height?.toString() ?: "--"
+        view.findViewById<TextView>(R.id.user_weight).text = userDetails?.weight?.toString() ?: "--"
+        view.findViewById<TextView>(R.id.user_age).text = userDetails?.age?.toString() ?: "--"
+
+        // Rest of your existing code...
         val editProfile = view.findViewById<ImageView>(R.id.profilemore1)
         editProfile.setOnClickListener {
             startActivity(Intent(requireActivity(), EditProfile::class.java))
         }
+
         val achievement = view.findViewById<ImageView>(R.id.profilemore2)
         achievement.setOnClickListener {
             startActivity(Intent(requireActivity(), Achievement::class.java))
         }
+
         val contactus = view.findViewById<ImageView>(R.id.contact_us)
         contactus.setOnClickListener {
             startActivity(Intent(requireActivity(),ContactUsActivity::class.java))
         }
+
         val privacy = view.findViewById<ImageView>(R.id.more_privacy)
-       privacy.setOnClickListener {
+        privacy.setOnClickListener {
             startActivity(Intent(requireActivity(),PrivacyPolicyActivity::class.java))
         }
+
         val settings = view.findViewById<ImageView>(R.id.more_settings)
         settings.setOnClickListener {
             startActivity(Intent(requireActivity(), ChangePasswordActivity::class.java))
         }
-
-
 
         // Logout button
         val logoutButton = view.findViewById<Button>(R.id.logout_button)

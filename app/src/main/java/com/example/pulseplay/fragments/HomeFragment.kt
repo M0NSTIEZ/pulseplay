@@ -21,10 +21,6 @@ import com.example.pulseplay.R
 import com.example.pulseplay.Register
 import com.example.pulseplay.dashboard.AvgBloodPressure
 import com.example.pulseplay.dashboard.AvgBodyTemperature
-import com.example.pulseplay.dashboard.AvgCaloriesConsumed
-import com.example.pulseplay.dashboard.AvgFatPercentage
-import com.example.pulseplay.dashboard.AvgOxygenSat
-import com.example.pulseplay.dashboard.AvgRespiratoryRate
 import com.example.pulseplay.dashboard.AvgWalkingHR
 import com.example.pulseplay.dashboard.BodyMassIndex
 import com.example.pulseplay.dashboard.HeartRate
@@ -156,10 +152,7 @@ class HomeFragment : Fragment() {
             val latestBloodPressureSystolic = data.bloodPressureSystolic.lastOrNull { it.date == currentDate }
             val latestBloodPressureDiastolic = data.bloodPressureDiastolic.lastOrNull { it.date == currentDate }
             val latestBodyTemp = data.bodyTemperature.lastOrNull { it.date == currentDate }
-            val latestRespiratoryRate = data.respiratoryRate.lastOrNull { it.date == currentDate }
-            val latestOxygenSaturation = data.oxygenSaturation.lastOrNull { it.date == currentDate }
-            val latestFatPercentage = data.bodyFatPercentage.lastOrNull { it.date == currentDate }
-            val latestDietaryEnergy = data.dietaryEnergyConsumed.lastOrNull { it.date == currentDate }
+
 
             // Update UI with latest values
             binding.totalStepsValue.text = latestSteps?.value?.toInt().toString() + " /steps"
@@ -185,10 +178,6 @@ class HomeFragment : Fragment() {
             println("Latest Walking Heart Rate: $latestWalkingHeartRate")
             println("Latest Blood Pressure: $latestBloodPressureSystolic/$latestBloodPressureDiastolic")
             println("Latest Body Temp: $latestBodyTemp")
-            println("Latest Respiratory Rate: $latestRespiratoryRate")
-            println("Latest Oxygen Saturation: $latestOxygenSaturation")
-            println("Latest Fat Percentage: $latestFatPercentage")
-            println("Latest Dietary Energy: $latestDietaryEnergy")
         }
 
         // Update prediction circles

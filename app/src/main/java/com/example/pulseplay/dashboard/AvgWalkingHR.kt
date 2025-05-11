@@ -104,7 +104,7 @@ class AvgWalkingHR : AppCompatActivity() {
 
             axisLeft.apply {
                 axisMinimum = 20f // Reasonable min for walking HR
-                axisMaximum = 150f // Reasonable max for walking HR
+                axisMaximum = 200f // Reasonable max for walking HR
                 granularity = 10f
                 textColor = Color.BLACK
                 setDrawGridLines(true)

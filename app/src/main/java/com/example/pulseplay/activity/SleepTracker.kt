@@ -80,7 +80,7 @@ class SleepTracker : AppCompatActivity() {
         }
 
         val dataSet = BarDataSet(entries, "Sleep (hrs)").apply {
-            colors = ColorTemplate.MATERIAL_COLORS.toList()
+            colors = listOf(Color.GREEN) // Set color to green
             valueTextColor = Color.BLACK
             valueTextSize = 14f
         }

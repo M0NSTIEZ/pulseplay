@@ -1,31 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".dashboard.AvgWalkingHR">
+
     <TextView
         android:id="@+id/walking_hr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Average Walking Heart Rate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"/>
+        android:textColor="@android:color/black"/>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/whr_bar_chart"
+        android:layout_below="@+id/walking_hr"
         android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
         android:layout_height="300dp"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_margin="16dp"/>
+    <ScrollView
+        android:layout_below="@+id/whr_bar_chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_margin="20dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🚶 Avg. Walking HR"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Walking heart rate zones (based on max HR = 220 - age):\n\n• Light: 50-60% of max HR\n• Moderate: 60-70% of max HR\n• Brisk: 70-80% of max HR\n\nIdeal walking HR depends on fitness goals:\n• Fat burning: 60-70% max HR\n• Cardio fitness: 70-80% max HR\n• Recovery walks: 50-60% max HR\n\nAverage walking HR typically 90-120 bpm for most adults. Well-trained athletes may have lower walking HR."
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
